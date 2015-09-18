@@ -64,24 +64,9 @@
                     };
 
                     Portfolio.update({id: $scope.portfolio.id}, angular.toJson(data), function (response) {
-                        $alert({
-                            title: 'Sucesso',
-                            content: 'Informações salvas com sucesso!',
-                            container: '#alerts-container',
-                            type: 'success',
-                            dismissable: true,
-                            duration: 5
-                        });
+                        $scope.alerts =[{type: 'success', msg: 'Informações salvas com sucesso!'}];
                     }, function (response) {
-                        $alert({
-                            title: 'Erro',
-                            content: 'As informações não foram salvas!',
-                            container: '#alerts-container',
-                            type: 'danger',
-                            dismissable: true,
-                            duration: 5,
-                            animation: 'am-fade-and-slide-top'
-                        });
+                        $scope.alerts =[{type: 'danger', msg: 'As informações não foram salvas!'}];
                     });
                 };
 
@@ -106,18 +91,18 @@
                         Portfolio.config({id: $scope.portfolio.config.id}, data, function (response) {
 
 
-                            $scope.alerts.push({type: 'success', msg: 'Informações salvas com sucesso!'});
+                            $scope.alerts =[{type: 'success', msg: 'Informações salvas com sucesso!'}];
 
 
                         }, function (response) {
 
-                            $scope.alerts.push({type: 'danger', msg: 'As informações não foram salvas!'});
+                            $scope.alerts =[{type: 'danger', msg: 'As informações não foram salvas!'}];
 
                         });
                     } else {
 
                         Portfolio.newConfig(data, function (response) {
-                            $scope.alerts.push({type: 'success', msg: 'Informações salvas com sucesso!'});
+                            $scope.alerts =[{type: 'success', msg: 'Informações salvas com sucesso!'}];
                         })
                     }
 
