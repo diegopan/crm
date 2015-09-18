@@ -1,0 +1,275 @@
+<div class="portlet" ng-controller="StatusController as Status">
+
+    <div class="portlet-body">
+
+        <div class="col-sm-3">
+            <div class="table-scrollable">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">
+                            <i class="fa fa-line-chart"></i>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs green-meadow">
+                               Positivação </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs blue-madison">
+                                 Venda </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs blue-ebonyclay">
+                                Tiket Médio </a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="table-scrollable" ng-init="[Status.getDaily(),Status.getMonthly()]">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">
+                            Hoje&nbsp;&nbsp;<a href="javascript:;" ng-click="Status.getDaily()"><i
+                                class="fa fa-refresh"></i></a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs green-meadow-stripe">
+                                <i class="fa fa-check"></i>&nbsp; {{Status.std.daily.posit}} /
+                                {{Status.std.daily.agendamentos}} </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs blue-madison-stripe">
+                                R$&nbsp; {{Status.std.daily.venda}} </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs blue-ebonyclay-stripe">
+                                R$&nbsp; {{Status.std.daily.tiket}} </a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="table-scrollable">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">
+                            Mensal&nbsp;&nbsp;<a href="javascript:;" ng-click="Status.getMonthly()"><i
+                                class="fa fa-refresh"></i></a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs green-meadow-stripe">
+                                <i class="fa fa-check"></i>&nbsp; {{Status.std.monthly.posit}} /
+                                {{Status.std.monthly.agendamentos}}</a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs blue-madison-stripe">
+                                R$&nbsp; {{Status.std.monthly.venda}} </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs blue-ebonyclay-stripe">
+                                R$&nbsp; {{Status.std.monthly.tiket}} </a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-3 hide">
+            <div class="table-scrollable">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">
+                            Projeção&nbsp;&nbsp;<i class="fa fa-line-chart"></i>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs green-meadow-stripe">
+                                <i class="fa fa-check"></i>&nbsp; 15 / 25 </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs blue-madison-stripe">
+                                <i class="fa fa-usd"></i>&nbsp; 2.354,00 </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="highlight text-center">
+                            <a href="javascript:;" class="btn default btn-xs blue-ebonyclay-stripe">
+                                <i class="fa fa-usd"></i>&nbsp; 2.354,00 </a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <br/><br/>
+
+        <div class="caption" style="border-bottom: 1px solid #eee; padding-bottom: 10px;">
+            <i class="fa fa-calendar-check-o font-green-sharp"></i>
+            <span class="caption-helper font-green-sharp bold uppercase">Análise Trimestral da Carteira</span>
+        </div>
+        <br/>
+        <div class="col-sm-12" ng-controller="CipController as Cip" ng-init="[Cip.getTrimestralCarteira()]">
+            <div class="col-sm-4">
+                <div class="table-scrollable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center">
+                                Informações Gerais
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">Ticket Médio: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.ticket_medio}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">Méd. Semanal: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.media_semanal}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">Méd. Trimestral: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.venda_bruta}}</span>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="table-scrollable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center">
+                                Vendas / Canal
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">Ativo: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_televendas}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">Receptivo: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_telemarketing}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">Eletrônico: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_eletronico}}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="table-scrollable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center">
+                                Segmento de Produtos
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">Genéricos: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_generico}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">Hig. Beleza: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_hb}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">OTC: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_otc}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="highlight text-left">
+                                <span class="bold text-blue">Outros: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_outros}}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+

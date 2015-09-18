@@ -1,0 +1,170 @@
+<div class="col-md-12 col-sm-12">
+    <!-- BEGIN SEARCH FIELD -->
+    <div class="input-icon">
+        <i class="fa fa-search"></i>
+        <input id="search" name="search" ng-model="search" type="text" class="form-control todo-taskbody-due"
+               placeholder="Pesquise por Código, CNPJ ou Razão...">
+    </div>
+    <!-- END SEARCH FIELD -->
+    <br />
+
+    <div class="scroller" style="max-height: 600px;"
+         slimscroll="{color:'#dae3e7', height: '600px'}">
+        <div class="todo-tasklist">
+            <div class="todo-tasklist-item"
+                 ng-repeat="ag in agendamentos | toArray: false | filter:search | AgSelect:agSelected" ng-click="initSales(ag); setAg(ag)"
+                 ng-class="{'todo-tasklist-item-border-green': ag.valor_mes > 0, 'todo-tasklist-item-border-blue': ag.valor_mes < 1}">
+
+                <div class="todo-tasklist-item-title">
+                    {{ag.razao}} &nbsp;&nbsp;||&nbsp;&nbsp; <span class="todo-tasklist-date"><i class="fa fa-clock-o"></i> {{ag.horario}} </span>
+                </div>
+                <div class="todo-tasklist-item-text">
+                    <strong>CNPJ:&nbsp;</strong>{{ag.cnpj}}&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;
+                    <strong>C&oacute;d:&nbsp;</strong>{{ag.cod_cli}}&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;<i
+                        class="fa fa-user"></i> {{ag.contato}}
+                    <br>
+                    <br>
+                    <ul class="list-inline">
+                        <li ng-repeat="p in ag.fone"><i class="fa fa-phone"></i> {{p}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="todo-tasklist-controls pull-left">
+                    <ul class="list-inline">
+                        <li ng-repeat="tg in ag.tags">
+                            <span class="todo-tasklist-badge badge badge-roundless uppercase">{{tg}}</span>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- BEGIN CIP CONTENT -->
+        <div id="client_cip" ng-show="showCip">
+            <br />
+            <br />
+            <div class="portlet">
+                <div class="portlet-body">
+                    <div class="caption" style="border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                        <i class="fa fa-calendar-check-o font-blue-dark"></i>
+                        <span class="caption-helper font-blue-dark bold uppercase">Análise Trimestral do Cliente</span>
+                    </div>
+                    <br/>
+                    <div class="col-sm-12" >
+                        <div class="col-sm-6">
+                            <div class="table-scrollable">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Informações Gerais
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">Ticket Médio: </span>
+                                            <span class="pull-right">R$ {{cipData.ticket_medio}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">Méd. Semanal: </span>
+                                            <span class="pull-right">R$ {{cipData.media_semanal}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">Méd. Trimestral: </span>
+                                            <span class="pull-right">R$ {{cipData.venda_bruta}}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="table-scrollable">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Vendas por Canal
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">Ativo: </span>
+                                            <span class="pull-right">R$ {{cipData.valor_televendas}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">Receptivo: </span>
+                                            <span class="pull-right">R$ {{cipData.valor_telemarketing}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">Eletrônico: </span>
+                                            <span class="pull-right">R$ {{cipData.valor_eletronico}}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="table-scrollable">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Vendas por Segmento
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">Genéricos: </span>
+                                            <span class="pull-right">R$ {{cipData.valor_generico}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">Hig. Beleza: </span>
+                                            <span class="pull-right">R$ {{cipData.valor_hb}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">OTC: </span>
+                                            <span class="pull-right">R$ {{cipData.valor_otc}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight text-left">
+                                            <span class="bold text-blue">Outros: </span>
+                                            <span class="pull-right">R$ {{cipData.valor_outros}}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CIP CONTENT -->
+
+
+    </div>
+</div>

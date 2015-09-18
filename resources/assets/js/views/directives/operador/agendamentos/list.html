@@ -1,0 +1,422 @@
+<div class="row">
+    <!-- BEGIN LEFT CONTENT-->
+    <div class="col-md-5 col-sm-4">
+
+        <div class="todo-ui">
+
+            <div class="todo-content">
+                <div class="portlet light">
+                    <!-- PROJECT HEAD -->
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-bar-chart font-green-sharp hide"></i>
+                            <span class="caption-helper font-green-sharp bold uppercase">ATENDIMENTOS AGENDADOS PARA HOJE</span>
+                        </div>
+                        <div class="actions">
+                            <a href="javascript:;" class="btn btn-default" ng-hide="vendaAleatoria" ng-click="initVendaAleatoria()">Registrar Venda Aleatória</a>
+                            <a href="javascript:;" class="btn btn-default" ng-show="vendaAleatoria" ng-click="endVendaAleatoria()">Voltar</a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+
+                        <!-- BEGIN AGENDAMENTOS -->
+                        <div class="row"
+                             ng-controller="AgendamentosAtendimentosController as Atendimentos"
+                             ng-init="getAtendimentos()"
+                             ng-hide="vendaAleatoria">
+
+                            <atendimentos-agendados></atendimentos-agendados>
+                        </div>
+                        <!-- END AGENDAMENTOS -->
+
+                        <!-- BEGIN VENDA ALEATÓRIA -->
+                        <div class="row" ng-show="vendaAleatoria" ng-controller="VendaAleatoriaController as vendaAl">
+                            <venda-aleatoria></venda-aleatoria>
+                        </div>
+                        <!-- END VENDA ALEATÓRIA -->
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END LEFT CONTENT-->
+
+
+    <!-- BEGIN RIGHT CONTENT-->
+    <div class="col-md-7 col-sm-8">
+
+        <div class="todo-ui">
+
+            <!-- BEGIN TODO CONTENT -->
+            <div class="todo-content">
+                <div class="portlet light">
+                    <!-- PROJECT HEAD -->
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-line-chart font-green-sharp"></i>
+                            <span class="caption-helper font-green-sharp bold uppercase">Desempenho da Carteira</span>
+                        </div>
+                        <div class="actions">
+
+                        </div>
+                    </div>
+                    <!-- end PROJECT HEAD -->
+                    <div class="portlet-body">
+
+                        <div class="row">
+
+                            <!-- BEGIN PORTFOLIO FORMS -->
+                            <div class="col-sm-12">
+
+                                <!-- BEGIN GENERAL OPERATOR STATS -->
+                                <div class="col-md-12" ng-show="agenda.showStats">
+                                    <op-status></op-status>
+                                </div>
+                                <!-- END GENERAL OPERATOR STATS -->
+
+
+
+                                <!-- BEGIN FORM NEW SALES-->
+                                <div class="col-md-12"  ng-show="salesFormViewOnly.show">
+                                    <form class="form-horizontal" name="form" novalidate>
+                                    <!-- FORM HEAD -->
+                                    <div class="form">
+                                        <div class="form-group">
+                                            <div class="col-md-8 col-sm-8">
+                                                <div class="todo-taskbody-user">
+                                                    <span class="todo-username pull-left">
+                                                        <i class="fa fa-suitcase"></i>&nbsp;&nbsp;{{salesFormViewOnly.client}} &nbsp;&nbsp;||&nbsp;&nbsp;
+                                                        <i class="fa fa-clock-o"></i> &nbsp;{{salesFormViewOnly.horario}}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="todo-taskbody-date pull-right">
+
+                                                    <a class="btn btn-circle btn-sm btn-default" data-ng-click="initRescheduling()">
+                                                        <i class="font-blue fa fa-clock-o"></i>&nbsp;Reagendar &nbsp;
+                                                    </a>
+
+                                                    <a class="btn btn-circle btn-sm btn-default" data-ng-click="endSales()">
+                                                        &nbsp;<i class="font-red fa fa-arrow-left"></i>&nbsp;Voltar
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END FORM HEAD -->
+
+
+                                        <div class="form-group">
+                                            <!-- SALE NUMBER -->
+                                            <div class="col-md-3">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    <input id="saleNumber" name="number" ng-model="pedido.number" type="text" class="form-control todo-taskbody-due"
+                                                           placeholder="N&uacute;mero do pedido..." focus-me="{{salesFormViewOnly.setFocus}}" required>
+                                                </div>
+                                            </div>
+                                            <!-- SALE VALUE -->
+                                            <div class="col-md-3">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-usd"></i>
+                                                    <input name="value" type="text" ng-model="pedido.value" class="form-control todo-taskbody-due"
+                                                           placeholder="Valor..." required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- SALE TAGS -->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-tags"></i>
+                                                    <input type="text" ng-model="pedido.tags" class="form-control todo-taskbody-due"
+                                                           placeholder="Tags...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- SALE TAGS -->
+
+                                        <!-- SALE DESC -->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-comment"></i>
+                                                    <textarea ng-model="pedido.obs" class="form-control todo-taskbody-taskdesc" rows="8"
+                                                              placeholder="Observações...">
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END SALE DESC -->
+
+                                        <div class="form-actions right todo-form-actions">
+                                            <button ng-click="saveSale()" ng-disabled="!form.$valid" class="btn btn-circle btn-sm green-haze">
+                                                &nbsp;<i class="fa fa-plus"></i>&nbsp;
+                                                Adicionar Pedido
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                    <tabset>
+
+                                        <tab heading="Pedidos">
+                                            <div class="scroller table-scrollable" style="max-height:168px;"
+                                                 slimscroll="{color:'#dae3e7', height: '180px'}">
+                                                <table class="table table-bordered table-condensed table-hover">
+                                                    <thead>
+
+                                                    <tr>
+                                                        <th class="font-blue-ebonyclay"><i
+                                                                class="fa fa-shopping-cart"></i>&nbsp;Pedido
+                                                        </th>
+                                                        <th class="font-blue-ebonyclay"><i class="fa fa-usd"></i>&nbsp;Valor
+                                                        </th>
+                                                        <th class="font-blue-ebonyclay"><i class="fa fa-tags"></i>&nbsp;Tags
+                                                        </th>
+                                                        <th class="font-blue-ebonyclay text-center"><i class="fa fa-cogs"></i></th>
+                                                    </tr>
+
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="s in sales">
+                                                        <td class="font-blue-ebonyclay" width="20%">{{s.number}}</td>
+                                                        <td class="font-blue-ebonyclay" width="20%">{{s.value}}</td>
+                                                        <td class="font-blue-ebonyclay">
+                                                            <ul class="list-inline" style="margin-bottom:0;">
+                                                                <li ng-repeat="tag in s.tags">
+                                                                    <span class="todo-tasklist-badge badge badge-roundless uppercase">{{tag}}</span>
+                                                                </li>
+                                                            </ul>
+
+                                                        </td>
+                                                        <td class="font-blue-ebonyclay text-center" width="20%">
+                                                            <a href="javascript:void(0);" class="btn default btn-xs purple" ng-click="editSale(s)">
+                                                                <i class="fa fa-edit"></i> Editar </a>
+                                                            <a href="javascript:void(0);" class="btn default btn-xs red" ng-click="removeSale(s)">
+                                                                <i class="fa fa-trash-o"></i> Excluir </a>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </tab>
+
+                                    </tabset>
+                                </form>
+                                </div>
+                                <!-- END FORM NEW SALES-->
+
+
+
+
+
+                                <!-- BEGIN EDIT SALES-->
+                                <form ng-show="salesEditForm.show" class="form-horizontal" name="formEdit" novalidate>
+                                    <!-- FORM HEAD -->
+                                    <div class="form">
+                                        <div class="form-group">
+                                            <div class="col-md-8 col-sm-8">
+                                                <div class="todo-taskbody-user">
+                                                    <span class="todo-username pull-left">
+                                                        <i class="fa fa-suitcase"></i>&nbsp;&nbsp;{{salesFormViewOnly.client}} &nbsp;&nbsp;||&nbsp;&nbsp;
+                                                        <i class="fa fa-clock-o"></i> &nbsp;{{salesFormViewOnly.time}} &nbsp;&nbsp;||&nbsp;&nbsp;
+                                                        <i class="fa fa-shopping-cart"></i> &nbsp;{{sale.number}}&nbsp;&nbsp;||&nbsp;&nbsp;
+                                                        <i class="fa fa-usd"></i>&nbsp;{{sale.value}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="todo-taskbody-date pull-right">
+                                                    <a class="btn btn-circle btn-sm btn-default" data-ng-click="endEdit()">
+                                                        &nbsp;<i class="font-red fa fa-arrow-left"></i>&nbsp;Voltar
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END FORM HEAD -->
+
+
+                                        <div class="form-group">
+                                            <!-- SALE NUMBER -->
+                                            <div class="col-md-3">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    <input id="sale_number" name="number" ng-model="sale.number" type="text" class="form-control todo-taskbody-due"
+                                                           placeholder="N&uacute;mero do pedido..." required>
+                                                </div>
+                                            </div>
+                                            <!-- SALE VALUE -->
+                                            <div class="col-md-3">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-usd"></i>
+                                                    <input name="value" type="text" ng-model="sale.value" class="form-control todo-taskbody-due"
+                                                           placeholder="Valor..." required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- SALE TAGS -->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-tags"></i>
+                                                    <input type="text" ng-model="sale.tags" class="form-control todo-taskbody-due"
+                                                           placeholder="Tags...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- SALE TAGS -->
+
+                                        <!-- SALE DESC -->
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-comment"></i>
+                                                    <textarea ng-model="sale.obs" class="form-control todo-taskbody-taskdesc" rows="8"
+                                                              placeholder="Observações...">
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END SALE DESC -->
+
+                                        <div class="form-actions right todo-form-actions">
+                                            <button ng-click="updateSale()" ng-disabled="!formEdit.$valid" class="btn btn-circle btn-sm green-haze">
+                                                &nbsp;<i class="fa fa-edit"></i>&nbsp;
+                                                Alterar Pedido
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+
+                                </form>
+                                <!-- END EDIT SALES-->
+
+                                <!-- BEGIN FORM PORTFOLIO SALES DELETE -->
+                                <form ng-show="salesRemoveForm.show" class="form-horizontal" name="formRemove" novalidate>
+                                    <!-- FORM HEAD -->
+                                    <div class="form">
+                                        <div class="form-group">
+                                            <div class="col-md-8 col-sm-8">
+                                                <div class="todo-taskbody-user">
+                                                    <span class="todo-username pull-left">
+                                                        <i class="fa fa-suitcase"></i>&nbsp;&nbsp;{{salesFormViewOnly.client}} &nbsp;&nbsp;||&nbsp;&nbsp;
+                                                        <i class="fa fa-clock-o"></i> &nbsp;{{salesFormViewOnly.horario}}&nbsp;&nbsp;||&nbsp;&nbsp;
+                                                        <i class="fa fa-shopping-cart"></i> &nbsp;{{sale.number}}&nbsp;&nbsp;||&nbsp;&nbsp;
+                                                        <i class="fa fa-usd"></i> &nbsp;{{sale.value}}&nbsp;&nbsp;
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="todo-taskbody-date pull-right">
+
+                                                    <a class="btn btn-circle btn-sm btn-default" ng-click="endRemove()">
+                                                        &nbsp;<i class="font-red fa fa-arrow-left"></i>&nbsp;Voltar
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END FORM HEAD -->
+
+                                        <div class="form-group">
+                                            <div class="col-md-8 col-md-offset-2">
+
+                                                <h4 class="text-danger">
+                                                    <input name="confirm" type="checkbox" required checked="false" ng-model="confirm">
+                                                    Tenho certeza que desejo excluir a venda!
+                                                </h4>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-actions right todo-form-actions">
+                                            <button ng-click="deleteSale(sale)" ng-disabled="!formRemove.$valid" class="btn btn-circle btn-sm btn-danger">
+                                                &nbsp;<i class="fa fa-plus"></i>&nbsp;
+                                                Excluir Venda
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+
+                                </form>
+                                <!-- END FORM PORTFOLIO SALES DELETE -->
+
+                                <!-- BEGIN FORM RECHEDULE-->
+                                <form ng-show="rescheduleForm.show" class="form-horizontal" name="formReschedule" novalidate>
+                                    <!-- FORM HEAD -->
+                                    <div class="form">
+                                        <div class="form-group">
+                                            <div class="col-md-8 col-sm-8">
+                                                <div class="todo-taskbody-user">
+                                                    <span class="todo-username pull-left">
+                                                        <i class="fa fa-suitcase"></i>&nbsp;&nbsp;{{salesFormViewOnly.client}} &nbsp;&nbsp;
+
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="todo-taskbody-date pull-right">
+
+                                                    <a class="btn btn-circle btn-sm btn-default" data-ng-click="endRescheduling()">
+                                                        &nbsp;<i class="font-red fa fa-arrow-left"></i>&nbsp;Voltar
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END FORM HEAD -->
+
+
+                                        <div class="form-group">
+                                            <!-- SALE NUMBER -->
+                                            <div class="col-md-2">
+                                                <div class="input-icon">
+                                                    <i class="fa fa-clock-o"></i>
+                                                    <input autofocus id="reschTime" name="newtime" ng-model="portfolioRescheduling.newtime" type="text" class="form-control todo-taskbody-due"
+                                                           placeholder="00:00" required>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-actions right todo-form-actions">
+                                            <button ng-click="reschedule()" ng-disabled="!formReschedule.$valid" class="btn btn-circle btn-sm green-haze">
+                                                &nbsp;<i class="fa fa-plus"></i>&nbsp;
+                                                Reagendar
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                                <!-- BEGIN FORM RECHEDULE-->
+
+                            </div>
+                            <!-- END PORTFOLIO FORMS -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END TODO CONTENT -->
+        </div>
+    </div>
+    <!-- END RICHT CONTENT-->
+
+    <!-- END PAGE CONTENT-->
+</div>

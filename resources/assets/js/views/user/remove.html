@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Exclus&atilde;o de Teleoperador</div>
+                <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <h3>{{member.user.name}}:</h3>
+                                <ul class="list-unstyled">
+                                    <li><b>SAP: </b>{{member.sap}}</li>
+                                    <li><b>Equipe: </b>{{member.team.name}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <form name="form" novalidate>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <input name="confirm" type="checkbox" required checked="false" ng-model="confirm">
+                                    <span class="text-danger">Tenho certeza que desejo excluir o teleoperador! <br/></span>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="button" class="btn btn-danger" ng-disabled="!form.$valid" ng-click="remove()">Excluir</button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

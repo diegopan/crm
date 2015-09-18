@@ -1,0 +1,86 @@
+<div class="row">
+
+    <!-- BEGIN PAGE CONTENT-->
+
+    <!-- BEGIN LEFT CONTENT-->
+    <div class="col-sm-12">
+
+        <div class="todo-ui">
+
+            <!-- BEGIN TODO CONTENT -->
+            <div class="todo-content">
+                <div class="portlet light">
+                    <!-- PROJECT HEAD -->
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-bar-chart font-green-sharp hide"></i>
+                            <span class="caption-helper font-green-sharp bold uppercase">CARTEIRA DE CLIENTES</span>
+                        </div>
+                        <div class="actions">
+
+                        </div>
+                    </div>
+                    <div class="portlet-body flip-scroll">
+                        <table datatable="ng" dt-options="dtOptions" class="table table-bordered table-striped table-condensed table-hover flip-content">
+                            <thead class="flip-content">
+                            <tr>
+                                <th width="10%">
+                                    Código
+                                </th>
+                                <th width="20%">
+                                    Razão Social
+                                </th>
+                                <th class="numeric">
+                                    Cnpj
+                                </th>
+                                <th class="numeric">
+                                    Contato
+                                </th>
+
+                                <th class="numeric text-center"  width="8%">
+                                    <a href="javascript:;">
+                                        <i class="icon-settings font-blue-ebonyclay"></i>
+                                    </a>
+                                </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="cli in carteira">
+                                <td>
+                                    {{cli.client.cod}}
+                                </td>
+                                <td>
+                                    {{cli.client.razao}}
+                                </td>
+                                <td class="numeric">
+                                    {{cli.client.cnpj}}
+                                </td>
+                                <td class="numeric">
+                                    {{cli.responsible}}
+                                </td>
+
+                                <td class="numeric text-center">
+                                    <a ng-href="#/carteira/{{cli.id}}/history" data-title="Hist&oacute;rico de Pedidos" tooltip="Hist&oacute;rico de Pedidos">
+                                        <i class="icon-calendar font-blue-ebonyclay"></i>
+                                    </a>&nbsp;
+                                    <a ng-href="#/carteira/{{cli.id}}/edit" data-title="Editar" tooltip="Editar">
+                                        <i class="icon-note font-blue-ebonyclay"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- END TODO CONTENT -->
+        </div>
+    </div>
+    <!-- END LEFT CONTENT-->
+
+
+    <!-- END PAGE CONTENT-->
+</div>

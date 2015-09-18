@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Cadastro de Clientes em Lote</div>
+                <div class="panel-body">
+                    <div class="row">
+                    <div  class="alert alert-danger" ng-show="errors.fileError">
+                        <strong>Whoops!</strong> O arquivo enviado está corrompido ou é inválido.<br>
+                    </div>
+                    <form name="form" ng-submit="upload()" novalidate>
+                        <!-- uf field -->
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Selecione o Arquivo</label>
+                            <div class="col-md-4">
+                                <input type="file" class="form-control" name="file">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+<br />
+                    <div class="row" ng-show="errors.validation.hasError">
+                        <div  class="alert alert-danger">
+                            <strong>Whoops!</strong> Não foi possível salvar os dados.<br>
+                            <strong>RECARREGUE A JANELA [f5]</strong> para enviar o arquivo corrigido.
+                        </div>
+                        <div>
+                            <table class="table table-striped table-hover table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Dados Enviados</th>
+                                        <th>Erros</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="o in errors.validation.data">
+                                    <td width="60%"><code>{{o.data | json:4}}</code></td>
+                                    <td>
+                                        <ul class="list">
+                                            <li ng-repeat="(idx, eo) in o.msg"><b>{{idx}}:</b> <code>{{eo}}</code></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

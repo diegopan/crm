@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Editar Equipe</div>
+                <div class="panel-body">
+
+
+                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()" novalidate>
+
+                        <!-- name field -->
+                        <div class="form-group" ng-class="{'has-error':!form.name.$valid && form.name.$touched}">
+                            <label class="col-md-4 control-label">Nome:</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="name" ng-model="team.name" required>
+                                <div class="help-block" ng-messages="form.name.$error" ng-show="form.name.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- slug field -->
+                        <div class="form-group" ng-class="{'has-error':!form.slug.$valid && form.slug.$touched}">
+                            <label class="col-md-4 control-label">Apelido</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="slug" ng-model="team.slug" required>
+                                <div class="help-block" ng-messages="form.slug.$error" ng-show="form.slug.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- type field -->
+                        <div class="form-group" ng-class="{'has-error':!form.type.$valid && form.type.$touched}">
+                            <label class="col-md-4 control-label">Tipo</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="type" ng-model="team.type" value="{{team.type}}" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="1">Ativo</option>
+                                    <option value="2">Receptivo</option>
+                                </select>
+                                <div class="help-block" ng-messages="form.type.$error" ng-show="form.type.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary" ng-disabled="!form.$valid">Alterar</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

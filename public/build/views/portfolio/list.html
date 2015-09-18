@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Lista de Teleoperadores</div>
+                <div class="panel-body">
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Equipe</th>
+                            <th>SAP</th>
+                            <th>Clientes</th>
+                            <th>Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="o in members">
+                                <td>{{o.user.name}}</td>
+                                <td>{{o.team.name}}</td>
+                                <td>{{o.sap}}</td>
+                                <td>{{o.portfolios.length}}</td>
+                                <td>
+                                    <a ng-href="#/members/{{o.id}}/edit">Editar</a> |
+                                    <a ng-href="#/members/{{o.id}}/remove">Excluir</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

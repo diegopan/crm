@@ -1,0 +1,79 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Cadastro de Clientes</div>
+                <div class="panel-body">
+
+
+                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()" novalidate>
+
+                        <!-- cod field -->
+                        <div class="form-group" ng-class="{'has-error':!form.cod.$valid && form.cod.$touched}">
+                            <label class="col-md-4 control-label">C&oacute;digo</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="cod" ng-model="client.cod" required>
+                                <div class="help-block" ng-messages="form.cod.$error" ng-show="form.cod.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- cnpj field -->
+                        <div class="form-group" ng-class="{'has-error':!form.cnpj.$valid && form.cnpj.$touched}">
+                            <label class="col-md-4 control-label">Cnpj</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="cnpj" ng-model="client.cnpj" required>
+                                <div class="help-block" ng-messages="form.cnpj.$error" ng-show="form.cnpj.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- razao field -->
+                        <div class="form-group" ng-class="{'has-error':!form.razao.$valid && form.razao.$touched}">
+                            <label class="col-md-4 control-label">Raz&atilde;o Social</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="razao" ng-model="client.razao" required>
+                                <div class="help-block" ng-messages="form.razao.$error" ng-show="form.razao.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- uf field -->
+                        <div class="form-group" ng-class="{'has-error':!form.uf.$valid && form.uf.$touched}">
+                            <label class="col-md-4 control-label">UF</label>
+                            <div class="col-md-1">
+                                <input type="text" class="form-control" name="uf" ng-model="client.uf" required>
+                                <div class="help-block" ng-messages="form.uf.$error" ng-show="form.uf.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- phone field -->
+                        <div class="form-group" ng-class="{'has-error':!form.phone.$valid && form.phone.$touched}">
+                            <label class="col-md-4 control-label">Telefone</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="phone" ng-model="client.phone" required>
+                                <div class="help-block" ng-messages="form.phone.$error" ng-show="form.phone.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary" ng-disabled="!form.$valid">Salvar</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

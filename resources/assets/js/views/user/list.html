@@ -1,0 +1,96 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb hide">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="index.html">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Pages</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Todo</a>
+        </li>
+    </ul>
+
+</div>
+<!-- END PAGE HEADER-->
+
+<div class="row">
+
+    <div class="col-sm-12">
+
+        <div class="todo-ui">
+
+            <!-- BEGIN TODO CONTENT -->
+            <div class="todo-content">
+                <div class="portlet light">
+                    <!-- PROJECT HEAD -->
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-bar-chart font-blue-ebonyclay hide"></i>
+                            <span class="caption-helper font-blue-ebonyclay bold uppercase">USUARIOS</span>
+                        </div>
+                        <div class="actions">
+
+                        </div>
+                    </div>
+                    <div class="portlet-body flip-scroll">
+                        <table datatable="ng" dt-options="UserList.dtOptions" class="table table-bordered table-striped table-condensed table-hover flip-content">
+                            <thead class="flip-content">
+                            <tr>
+                                <th>
+                                    Nome
+                                </th>
+                                <th width="20%">
+                                    Usu&aacute;rio
+                                </th>
+                                <th>
+                                    Grupo
+                                </th>
+
+
+                                <th class="numeric text-center"  width="8%">
+                                    <a href="javascript:;">
+                                        <i class="icon-settings font-blue-ebonyclay"></i>
+                                    </a>
+                                </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="o in UserList.users">
+                                <td>
+                                    {{o.name}}
+                                </td>
+                                <td>
+                                    {{o.username}}
+                                </td>
+                                <td>
+                                    {{o.group.name}}
+                                </td>
+
+
+                                <td class="numeric text-center">
+                                    <a ng-href="#/user/{{o.id}}/edit" data-title="Editar" tooltip="Editar">
+                                        <i class="icon-note font-blue-ebonyclay"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- END TODO CONTENT -->
+        </div>
+    </div>
+    <!-- END LEFT CONTENT-->
+
+
+    <!-- END PAGE CONTENT-->
+</div>

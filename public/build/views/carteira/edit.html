@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-equalizer font-blue-hoki"></i>
+                    <span class="caption-subject font-blue-hoki bold uppercase">Alterar Cliente</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <tabset>
+
+                    <!-- BEGIN GENERAL INFORMATIONS TAB -->
+                    <tab heading="Informações Gerais">
+                        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+                        <!-- BEGIN FORM-->
+                        <form class="horizontal-form" name="formEdit" novalidate ng-submit="updateCarteira()">
+                            <div class="form-body">
+                                <h3 class="form-section">Altere as informações do cliente em sua carteira.</h3>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Razão Social:</label>
+                                            <input type="text" name="razao" ng-model="portfolio.client.razao" class="form-control" placeholder="Razão social" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Código:</label>
+                                            <input type="text" name="razao" ng-model="portfolio.client.cod" class="form-control" placeholder="Código do cliente" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">CNPJ:</label>
+                                            <input type="text" name="razao" ng-model="portfolio.client.cnpj" class="form-control" placeholder="CNPJ" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Telefone:</label>
+                                            <input type="text" id="phone" class="form-control" name="phone" placeholder="Telefones" ng-model="portfolio.phone">
+                                            <span class="help-block"><i class="fa fa-info-circle font-blue"></i>&nbsp;Você pode cadastrar vários números separando-os por vírgula "," </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Contato:</label>
+                                            <input type="text" id="responsible" ng-model="portfolio.responsible" name="responsible" class="form-control" placeholder="Contato">
+                                            <span class="help-block"><i class="fa fa-info-circle font-blue"></i>&nbsp;Nome da pessoa responsável por compras.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Email:</label>
+                                            <input type="text" id="email" name="email" ng-model="portfolio.email" class="form-control" placeholder="Email">
+                                            <span class="help-block"><i class="fa fa-info-circle font-blue"></i>&nbsp;Você pode cadastrar vários e-mails separando-os por vírgula "," </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions right">
+                                <a ng-href="#/carteira" class="btn default"><i class="font-red fa fa-arrow-left"></i> Voltar</a>
+                                <button type="submit" class="btn blue" ng-disabled="!formEdit.$valid"><i class="fa fa-check"></i> Salvar</button>
+                            </div>
+                        </form>
+                        <!-- END FORM-->
+                    </tab>
+                    <!-- END GENERAL INFORMATIONS TAB -->
+
+                    <!-- BEGIN SCHEDULE CONFIG TAB -->
+                    <tab heading="Informações Gerais">
+
+                        <div id="alerts-container2"></div>
+                        <!-- BEGIN FORM-->
+                        <form name="formReschedule" class="horizontal-form" ng-submit="updateScheduleConfig()">
+                            <div class="form-body">
+                                <h3 class="form-section">Agende horários de atendimento para o cliente.</h3>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Segunda:</label>
+                                            <input type="time" ng-model="scheduleCfg.seg" name="segunda"  class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Terça:</label>
+                                            <input type="time" ng-model="scheduleCfg.ter" name="terca"  class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Quarta:</label>
+                                            <input type="time" ng-model="scheduleCfg.qua" name="quarta"  class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Quinta:</label>
+                                            <input type="time" ng-model="scheduleCfg.qui" name="quinta"  class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Sexta:</label>
+                                            <input type="time" ng-model="scheduleCfg.sex" name="sexta"  class="form-control">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="form-actions right">
+                                <a ng-href="#/carteira" class="btn default"><i class="font-red fa fa-arrow-left"></i> Voltar</a>
+                                <button type="submit" class="btn blue" ng-disabled="!formReschedule.$valid"><i class="fa fa-check"></i> Salvar</button>
+                            </div>
+                        </form>
+                        <!-- END FORM-->
+                    </tab>
+                    <!-- END SCHEDULE CONFIG TAB -->
+
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

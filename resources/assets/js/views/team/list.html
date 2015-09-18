@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Lista de Equipes</div>
+                <div class="panel-body">
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Slug</th>
+                            <th>Tipo</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="o in teams">
+                            <td>{{o.name}}</td>
+                            <td>{{o.slug}}</td>
+                            <td>{{o.type}}</td>
+                            <td>
+                                <a ng-href="#/teams/{{o.id}}/edit">Editar</a> |
+                                <a ng-href="#/teams/{{o.id}}/remove">Excluir</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

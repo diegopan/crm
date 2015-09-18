@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Cadastro de Teleoperadores</div>
+                <div class="panel-body">
+
+
+                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()" novalidate>
+
+                        <!-- user field -->
+                        <div class="form-group" ng-class="{'has-error':!form.user_id.$valid && form.user_id.$touched}">
+                            <label class="col-md-4 control-label">Usuário:</label>
+                            <div class="col-md-6">
+
+                                <ui-select ng-model="user.selected" theme="bootstrap" on-select="resetUser($item)" name="user_id" required>
+                                    <ui-select-match placeholder="Selecione ou pesquise um usuário na lista...">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="u in users | filter: $select.search">
+                                        <div ng-bind-html="u.name | highlight: $select.search"></div>
+                                        <small ng-bind-html="u.username | highlight: $select.search"></small>
+                                    </ui-select-choices>
+                                </ui-select>
+
+                                <div class="help-block" ng-messages="form.user_id.$error" ng-show="form.user_id.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- team field -->
+                        <div class="form-group" ng-class="{'has-error':!form.team_id.$valid && form.team_id.$touched}">
+                            <label class="col-md-4 control-label">Equipe:</label>
+                            <div class="col-md-6">
+                                <ui-select ng-model="team.selected" theme="bootstrap" on-select="resetTeam($item)" name="team_id" required>
+                                    <ui-select-match placeholder="Selecione ou pesquise uma equipe na lista....">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="t in teams | filter: $select.search">
+                                        <div>
+                                            <small ng-bind-html="t.slug | highlight: $select.search"></small> -
+                                            <span ng-bind-html="t.name | highlight: $select.search"></span>
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div class="help-block" ng-messages="form.team_id.$error" ng-show="form.team_id.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SAP field -->
+                        <div class="form-group" ng-class="{'has-error':!form.sap.$valid && form.sap.$touched}">
+                            <label class="col-md-4 control-label">SAP</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="sap" ng-model="member.sap" required>
+                                <div class="help-block" ng-messages="form.sap.$error" ng-show="form.sap.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary" ng-disabled="!form.$valid">Salvar</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
