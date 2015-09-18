@@ -34,5 +34,4 @@ return array(
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
     'Crm\\' => array($baseDir . '/app'),
     'ClassPreloader\\' => array($vendorDir . '/classpreloader/classpreloader/src'),
-    'Barryvdh\\Cors\\' => array($vendorDir . '/barryvdh/laravel-cors/src'),
 );
