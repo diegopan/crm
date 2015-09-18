@@ -10,6 +10,10 @@
 
                 $scope.alerts = [];
 
+                $scope.closeAlert = function(index) {
+                    $scope.alerts.splice(index, 1);
+                };
+
                 $scope.portfolio = Portfolio.get({id: $routeParams.portfolioId}, function (response) {
 
                     if (response.phone) {
