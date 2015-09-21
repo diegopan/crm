@@ -6,20 +6,24 @@
                 <div class="panel-body">
 
 
-                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()" novalidate>
+                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="MemberNew.save()" novalidate>
 
                         <!-- user field -->
                         <div class="form-group" ng-class="{'has-error':!form.user_id.$valid && form.user_id.$touched}">
                             <label class="col-md-4 control-label">Usuário:</label>
                             <div class="col-md-6">
 
-                                <ui-select ng-model="user.selected" theme="bootstrap" on-select="resetUser($item)" name="user_id" required>
-                                    <ui-select-match placeholder="Selecione ou pesquise um usuário na lista...">{{$select.selected.name}}</ui-select-match>
-                                    <ui-select-choices repeat="u in users | filter: $select.search">
-                                        <div ng-bind-html="u.name | highlight: $select.search"></div>
-                                        <small ng-bind-html="u.username | highlight: $select.search"></small>
-                                    </ui-select-choices>
-                                </ui-select>
+                                <!-- BEGIN SEARCH USER FIELD -->
+                                <div class="input-icon">
+                                    <i class="fa fa-search"></i>
+                                    <input class="form-control" type="text" name="user_id"
+                                           placeholder="Pesquise usando o nome do usuário.."
+                                           ng-model="MemberNew.member.user_id"
+                                           typeahead="o.id as (o.name + ' - ' + o.username) for o in MemberNew.getUsers($viewValue) | limitTo:5"
+                                           typeahead-input-formatter="MemberNew.formatUser($model)"
+                                           typeahead-min-length="3"/>
+                                </div>
+                                <!-- END SEARCH USER FIELD -->
 
                                 <div class="help-block" ng-messages="form.user_id.$error" ng-show="form.user_id.$touched">
                                     <div ng-message="required">Campo obrigatório</div>
@@ -32,15 +36,17 @@
                         <div class="form-group" ng-class="{'has-error':!form.team_id.$valid && form.team_id.$touched}">
                             <label class="col-md-4 control-label">Equipe:</label>
                             <div class="col-md-6">
-                                <ui-select ng-model="team.selected" theme="bootstrap" on-select="resetTeam($item)" name="team_id" required>
-                                    <ui-select-match placeholder="Selecione ou pesquise uma equipe na lista....">{{$select.selected.name}}</ui-select-match>
-                                    <ui-select-choices repeat="t in teams | filter: $select.search">
-                                        <div>
-                                            <small ng-bind-html="t.slug | highlight: $select.search"></small> -
-                                            <span ng-bind-html="t.name | highlight: $select.search"></span>
-                                        </div>
-                                    </ui-select-choices>
-                                </ui-select>
+                                <!-- BEGIN SEARCH USER FIELD -->
+                                <div class="input-icon">
+                                    <i class="fa fa-search"></i>
+                                    <input class="form-control" type="text" name="team_id"
+                                           placeholder="Pesquise usando o nome da equipe"
+                                           ng-model="MemberNew.member.team_id"
+                                           typeahead="o.id as (o.name + ' - ' + o.slug) for o in MemberNew.getTeams($viewValue) | limitTo:5"
+                                           typeahead-input-formatter="MemberNew.formatTeam($model)"
+                                           typeahead-min-length="3"/>
+                                </div>
+                                <!-- END SEARCH USER FIELD -->
                                 <div class="help-block" ng-messages="form.team_id.$error" ng-show="form.team_id.$touched">
                                     <div ng-message="required">Campo obrigatório</div>
                                 </div>
@@ -51,7 +57,7 @@
                         <div class="form-group" ng-class="{'has-error':!form.sap.$valid && form.sap.$touched}">
                             <label class="col-md-4 control-label">SAP</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="sap" ng-model="member.sap" required>
+                                <input type="text" class="form-control" name="sap" ng-model="MemberNew.member.sap" required>
                                 <div class="help-block" ng-messages="form.sap.$error" ng-show="form.sap.$touched">
                                     <div ng-message="required">Campo obrigatório</div>
                                 </div>
