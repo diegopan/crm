@@ -12,6 +12,12 @@ use Crm\Entities\User;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+
+
+    protected $fieldSearchable = [
+        'username'
+    ];
+
     /**
      * Specify Model class name
      *
@@ -27,6 +33,6 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function boot()
     {
-        $this->pushCriteria( app(RequestCriteria::class) );
+        $this->pushCriteria( app('Prettus\Repository\Criteria\RequestCriteria') );
     }
 }

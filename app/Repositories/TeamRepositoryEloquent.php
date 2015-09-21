@@ -12,6 +12,11 @@ use Crm\Entities\Team;
  */
 class TeamRepositoryEloquent extends BaseRepository implements TeamRepository
 {
+
+    protected $fieldSearchable = [
+        'name'
+    ];
+
     /**
      * Specify Model class name
      *
@@ -27,6 +32,6 @@ class TeamRepositoryEloquent extends BaseRepository implements TeamRepository
      */
     public function boot()
     {
-        $this->pushCriteria( app(RequestCriteria::class) );
+        $this->pushCriteria( app('Prettus\Repository\Criteria\RequestCriteria') );
     }
 }
