@@ -132,30 +132,20 @@ class ClientService
     public function storeMany(array $data)
     {
 
-        //dd(count($data[0]));exit;
-
-            $lineError =[];
-            $preError = [];
 
 
+            foreach ($data as $key => $o) {
 
+                $o['created_at'] =  Carbon::now('America/Sao_Paulo')->toDateTimeString();
+                $o['updated_at'] =  Carbon::now('America/Sao_Paulo')->toDateTimeString();
+                $o['deleted_at'] =  null;
 
-            foreach ($data[0] as $key => $o) {
-
-                $o['created_at'] =  Carbon::now('America/Sao_Paulo');
-                $o['updated_at'] =  Carbon::now('America/Sao_Paulo');
-
-                if(!$this->validator->with($o)->passes(ValidatorInterface::RULE_CREATE)){
-                    $lineError[$key]['val'] = $this->validator->errorsBag()->getMessageBag();
-                    array_push($preError, $lineError[$key]);
-                }
+                $data[$key] = $o;
             }
 
 
-            if(count($preError) > 0){
 
-                return response()->json($preError, 412);
-            }else{
+
 
                 DB::beginTransaction();
                 try{
@@ -169,7 +159,7 @@ class ClientService
                     return response()->json(["error" => true, "message" => "falha ao inserir no banco"], 412);
                 }
 
-            }
+
 
     }
 
