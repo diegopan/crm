@@ -1,52 +1,97 @@
-angular.module('crm.controllers')
-    .controller('MemberNewController', ['$scope', '$location', 'Member', 'Team', 'appConfig', '$http',
-        function ($scope, $location, Member, Team, appConfig, $http) {
-
-            $scope.user = {};
-            $scope.users = [];
-
-            $scope.team = {};
-            $scope.teams = [];
+(function () {
 
 
+    angular.module('crm.controllers')
+        .controller('MemberNewController', ['$scope', '$location', 'User', 'Member', 'Team', 'appConfig', '$http',
+            function ($scope, $location, User, Member, Team, appConfig, $http) {
+
+                var vm = this;
+
+                vm.users = User.query();
+                vm.selectedUser = {};
+
+                vm.teams = Team.query();
+                vm.selectedTeam = {};
+;
 
 
-            $http.get(appConfig.baseUrl + '/user/search')
-                .then(function (response) {
-                    $scope.users = response.data
-                });
+                vm.getUsers = function (param) {
+                    return User.query({
+                        search: param,
+                        searchFields: 'username:like'
+                    }).$promise;
+                };
 
 
-            $http.get(appConfig.baseUrl + '/team')
-                .then(function (response) {
-                    $scope.teams = response.data
-                });
+                vm.formatUser = function (id) {
+
+                    if (id) {
+                        for (var i in vm.users) {
+                            if (vm.users[i].id == id) {
+                                return vm.users[i].name;
+                            }
+                        }
+
+                    }
+
+                    return '';
+                };
 
 
-            $scope.resetUser = function($item){
-                $scope.member.user_id = $item.id;
-            };
+                vm.getTeams = function (param) {
+                    return Team.query({
+                        search: param,
+                        searchFields: 'name:like'
+                    }).$promise;
+                };
 
 
-            $scope.resetTeam = function($item){
-                $scope.member.team_id = $item.id;
-            };
+                vm.formatTeam = function (id) {
+
+                    if (id) {
+                        for (var i in vm.teams) {
+                            if (vm.teams[i].id == id) {
+                                return vm.teams[i].name + '-' + vm.teams[i].slug;
+                            }
+                        }
+                    }
+
+                    return '';
+                };
 
 
 
-            $scope.member = new Member();
-
-            $scope.save = function () {
-
-                if ($scope.form.$valid) {
-                    $scope.member.$save().then(function () {
-                        $location.path('/members');
-                    }, function (response) {
-                        console.log(response);
-                    });
-                }
-
-            };
+                vm.member = {
+                    user_id: vm.selectedUser,
+                    team_id: vm.selectedTeam
+                };
 
 
-        }]);
+
+
+
+
+
+
+
+
+                vm.member = new Member();
+
+                vm.save = function () {
+
+                    if ($scope.form.$valid) {
+                        console.log('valido');
+                        vm.member.$save().then(function () {
+                            $location.path('/members');
+                        }, function (response) {
+                            console.log(response);
+                        });
+                    }
+
+                };
+
+
+            }]);
+
+
+})();
