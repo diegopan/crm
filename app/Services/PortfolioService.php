@@ -280,6 +280,21 @@ class PortfolioService
                 $toSave['team_id'] = $team->id;
             }
 
+
+            /*
+             * Tratamento para cnpj com menos de 14 digitos.
+             */
+            $cnpj_count = strlen( $data['cnpj']);
+
+            for($i = 0; $cnpj_count < 14; $i++){
+                $data['cnpj'] = substr_replace($data['cnpj'], '0', 0, 0);
+
+                $cnpj_count ++;
+            }
+
+
+
+
             /*
              * Check Client
              */
