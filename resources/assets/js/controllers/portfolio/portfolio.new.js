@@ -1,5 +1,5 @@
 angular.module('crm.controllers')
-    .controller('MemberNewController', ['$scope', '$location', 'Member', 'Team', 'appConfig', '$http',
+    .controller('PortfolioNewController', ['$scope', '$location', 'Member', 'Team', 'appConfig', '$http',
         function ($scope, $location, Member, Team, appConfig, $http) {
 
             $scope.user = {};

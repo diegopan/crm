@@ -2,8 +2,8 @@
 
 
     angular.module('crm.controllers')
-        .controller('MemberNewController', ['$scope', '$location', 'User', 'Member', 'Team', 'appConfig', '$http',
-            function ($scope, $location, User, Member, Team, appConfig, $http) {
+        .controller('MemberNewController', ['$scope', '$location', 'User', 'Member', 'Team',
+            function ($scope, $location, User, Member, Team) {
 
                 var vm = this;
 
@@ -12,7 +12,7 @@
 
                 vm.teams = Team.query();
                 vm.selectedTeam = {};
-;
+
 
 
                 vm.getUsers = function (param) {
@@ -65,13 +65,6 @@
                     user_id: vm.selectedUser,
                     team_id: vm.selectedTeam
                 };
-
-
-
-
-
-
-
 
 
 
