@@ -1,4 +1,4 @@
-var elixir = require('laravel-elixir')
+var elixir = require('laravel-elixir'),
 liveReload = require('gulp-livereload'),
     clean = require('rimraf'),
     gulp = require('gulp');
@@ -7,7 +7,7 @@ liveReload = require('gulp-livereload'),
 
 var config = {
     assets_path: './resources/assets',
-    build_path: './public/build',
+    build_path: './public/build'
 };
 
 /*
@@ -15,7 +15,7 @@ var config = {
  */
 config.bower_path = config.assets_path + '/../bower_components';
 
-config.build_path_js = config.build_path + '/js'
+config.build_path_js = config.build_path + '/js';
 config.build_vendor_path_js = config.build_path_js + '/vendor';
 config.vendor_path_js = [
     config.bower_path + '/jquery/dist/jquery.min.js',
@@ -120,6 +120,7 @@ gulp.task('copy-scripts', function(){
 gulp.task('clear-build-folder', function(){
     clean.sync(config.build_path);
 });
+
 
 
 gulp.task('default',['clear-build-folder'], function(){

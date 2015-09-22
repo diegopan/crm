@@ -1,34 +1,89 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Clients List</div>
-                <div class="panel-body">
 
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>C&oacute;digo</th>
-                            <th>Cnpj</th>
-                            <th>Raz&atilde;o Social</th>
-                            <th>A&ccedil;&otilde;es</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="o in clients">
-                            <td>{{o.cod}}</td>
-                            <td>{{o.cnpj}}</td>
-                            <td>{{o.razao}}</td>
-                            <td>
-                                <a ng-href="#/clients/{{o.id}}/edit">Editar</a> |
-                                <a ng-href="#/clients/{{o.id}}/remove">Excluir</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
 
+        <div class="col-sm-12">
+
+            <div class="todo-ui">
+
+                <!-- BEGIN TODO CONTENT -->
+                <div class="todo-content">
+                    <div class="portlet light">
+                        <!-- PROJECT HEAD -->
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-bar-chart font-green-sharp hide"></i>
+                                <span class="caption-helper font-green-sharp bold uppercase">CARTEIRA DE CLIENTES</span>
+                            </div>
+                            <div class="actions">
+
+                            </div>
+                        </div>
+                        <div class="portlet-body flip-scroll">
+                            <table datatable="ng" dt-options="ClientList.dtOptions" class="table table-bordered table-striped table-condensed table-hover flip-content">
+                                <thead class="flip-content">
+                                <tr>
+                                    <th width="10%">
+                                        Código
+                                    </th>
+
+                                    <th width="20%">
+                                        Razão Social
+                                    </th>
+
+                                    <th class="numeric">
+                                        Cnpj
+                                    </th>
+
+                                    <th>
+                                        CD
+                                    </th>
+
+                                    <th class="numeric text-center"  width="8%">
+                                        <a href="javascript:;">
+                                            <i class="icon-settings font-blue-ebonyclay"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="cli in ClientList.clients">
+                                    <td>
+                                        {{cli.client.cod}}
+                                    </td>
+
+                                    <td>
+                                        {{cli.client.razao}}
+                                    </td>
+
+                                    <td class="numeric">
+                                        {{cli.client.cnpj}}
+                                    </td>
+
+                                    <td class="numeric">
+                                        {{cli.uf}}
+                                    </td>
+
+                                    <td class="numeric text-center">
+                                        <a ng-href="#/carteira/{{cli.id}}/history" data-title="Hist&oacute;rico de Pedidos" tooltip="Hist&oacute;rico de Pedidos">
+                                            <i class="icon-calendar font-blue-ebonyclay"></i>
+                                        </a>&nbsp;
+                                        <a ng-href="#/carteira/{{cli.id}}/edit" data-title="Editar" tooltip="Editar">
+                                            <i class="icon-note font-blue-ebonyclay"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+                <!-- END TODO CONTENT -->
             </div>
         </div>
+
     </div>
 </div>

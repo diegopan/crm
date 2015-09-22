@@ -12,7 +12,7 @@
 
                     <!-- BEGIN GENERAL INFORMATIONS TAB -->
                     <tab heading="Informações Gerais">
-                        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+                        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="3000">{{alert.msg}}</alert>
                         <!-- BEGIN FORM-->
                         <form class="horizontal-form" name="formEdit" novalidate ng-submit="updateCarteira()">
                             <div class="form-body">
@@ -78,7 +78,7 @@
                     <!-- BEGIN SCHEDULE CONFIG TAB -->
                     <tab heading="Informações Gerais">
 
-                        <div id="alerts-container2"></div>
+                        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="3000">{{alert.msg}}</alert>
                         <!-- BEGIN FORM-->
                         <form name="formReschedule" class="horizontal-form" ng-submit="updateScheduleConfig()">
                             <div class="form-body">
