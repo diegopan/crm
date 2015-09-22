@@ -121,6 +121,7 @@ app.config(['$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigP
             .when('/clients', {
                 templateUrl: 'build/views/client/list.html',
                 controller: 'ClientListController',
+                controllerAs: 'ClientList',
                 data: {
                     authorizedRoles: [USER_ROLES.admin]
                 }
@@ -194,6 +195,7 @@ app.config(['$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigP
             .when('/members/new', {
                 templateUrl: 'build/views/member/new.html',
                 controller: 'MemberNewController',
+                controllerAs: 'MemberNew',
                 data: {
                     authorizedRoles: [USER_ROLES.admin]
                 }
