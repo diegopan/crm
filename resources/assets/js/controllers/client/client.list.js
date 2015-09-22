@@ -1,7 +1,50 @@
-angular.module('crm.controllers')
-    .controller('ClientListController', ['$scope','Client', function($scope, Client){
-
-        $scope.clients = Client.query();
+(function () {
 
 
-    }]);
+    angular.module('crm.controllers')
+        .controller('ClientListController', ['$scope', 'Client', 'DTOptionsBuilder', function ($scope, Client, DTOptionsBuilder) {
+
+            var vm = this;
+
+            vm.clients = Client.query();
+
+
+            vm.dtOptions = DTOptionsBuilder
+                .newOptions()
+                .withPaginationType('full_numbers')
+                .withBootstrap()
+                .withBootstrapOptions({
+                    pagination: {
+                        classes: {
+                            ul: 'pagination pagination-sm'
+                        }
+                    }
+                })
+                .withLanguage({
+                    "sEmptyTable":     "Nenhum registro disponível",
+                    "sInfo":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "sInfoEmpty":      "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered":   "(filtrados de _MAX_ registros no total)",
+                    "sInfoPostFix":    "",
+                    "sInfoThousands":  ",",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing":     "Processando...",
+                    "sSearch":         "Pesquisar:",
+                    "sZeroRecords":    "Nenhum registro encontrado.",
+                    "oPaginate": {
+                        "sFirst":    "Primeira",
+                        "sLast":     "Última",
+                        "sNext":     "Próxima",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": activate to sort column ascending",
+                        "sSortDescending": ": activate to sort column descending"
+                    }
+                });
+
+
+        }]);
+
+})();
