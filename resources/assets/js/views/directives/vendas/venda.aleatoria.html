@@ -5,10 +5,10 @@
         <input class="form-control" type="text" name="client_id"
                placeholder="Pesquise somente por CNPJ ..."
                ng-model="vendaAl.selectedClient"
-               typeahead="o.id as (o.cnpj + ' - ' + o.razao) for o in vendaAl.getClients($viewValue) | limitTo:10"
+               typeahead="o as (o.cnpj + ' - ' + o.razao) for o in vendaAl.getClients($viewValue)|limitTo:10"
                typeahead-input-formatter="vendaAl.formatClient($model)"
                typeahead-on-select="vendaAl.changeCli($item)"
-               typeahead-min-length="3"/>
+               typeahead-min-length="4"/>
     </div>
     <!-- END SEARCH FIELD -->
     <br />
@@ -28,7 +28,7 @@
                 <div class="portlet-body">
                     <div class="caption" style="border-bottom: 1px solid #eee; padding-bottom: 10px;">
                         <i class="fa fa-calendar-check-o font-blue-dark"></i>
-                        <span class="caption-helper font-blue-dark bold uppercase">Análise Trimestral do Cliente</span>
+                        <span class="caption-helper font-blue-dark bold uppercase">Análise do Cliente</span>
                     </div>
                     <br/>
                     <div class="col-sm-12" >
@@ -57,7 +57,7 @@
                                     </tr>
                                     <tr>
                                         <td class="highlight text-left">
-                                            <span class="bold text-blue">Méd. Trimestral: </span>
+                                            <span class="bold text-blue">Méd. Semestral: </span>
                                             <span class="pull-right">R$ {{vendaAl.clientInfo.venda_bruta}}</span>
                                         </td>
                                     </tr>
