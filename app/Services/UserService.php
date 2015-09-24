@@ -109,11 +109,10 @@ class UserService
         }
 
 
-        if($data['recovery']){
-            $data['recovery'] = bcrypt($data['recovery']);
-        }else{
-            $data['recovery'] = bcrypt($data['panpharma']);
+        if(!$data['recovery']){
+            $data['recovery'] = 'panpharma';
         }
+
 
         $data['remember_token'] = str_random(10);
 
@@ -123,6 +122,56 @@ class UserService
             return response()->json(['success' => $this->repository->create($data)]);
         } catch (ValidatorException $e) {
             return response()->json(['error' => true, 'message' => $e->getMessageBag()], 412);
+        }
+    }
+
+
+
+
+    public function update(array $data, $id)
+    {
+
+            try {
+
+                if (User::findOrFail($id)) {
+
+                    try {
+
+                        return response()->json($this->repository->update($data, $id));
+
+                    } catch (ValidatorException $e) {
+
+                        return response()->json([
+                            "error" => true,
+                            "message" => $e->getMessageBag()
+                        ], 412);
+                    }
+
+                }
+
+            } catch (ModelNotFoundException $e) {
+
+                return response()->json([
+                    "error" => true,
+                    "message" => $e->getMessage()
+                ], 412);
+            }
+
+    }
+
+
+
+    public function delete($id)
+    {
+        try{
+            if( User::findOrFail($id) ) {
+                return response()->json(['success' => $this->repository->delete($id)]);
+            }
+        }catch (ModelNotFoundException $e){
+            return response()->json([
+                "error" => true,
+                "message" => $e->getMessage()
+            ], 404);
         }
     }
 

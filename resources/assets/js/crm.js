@@ -119,6 +119,24 @@ app.config(['$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigP
                 }
             })
 
+            .when('/users/:id/edit', {
+                templateUrl: 'build/views/user/edit.html',
+                controller: 'UserEditController',
+                controllerAs: 'UserEdit',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+
+
+            .when('/users/:id/remove', {
+                templateUrl: 'build/views/user/remove.html',
+                controller: 'UserRemoveController',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+
             .when('/home', {
                 templateUrl: 'build/views/home.html',
                 controller: 'HomeController',

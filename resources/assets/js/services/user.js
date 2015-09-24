@@ -1,6 +1,6 @@
 angular.module('crm.services')
     .service('User',['$resource','appConfig', function($resource, appConfig){
-        return $resource(appConfig.baseUrl + '/user',{}, {
+        return $resource(appConfig.baseUrl + '/user/:id',{id:'@id'}, {
             update: {
                 method: 'PUT'
             },
@@ -13,5 +13,5 @@ angular.module('crm.services')
                 url: appConfig.baseUrl + '/user/authenticated'
             }
 
-        });;
+        });
     }]);

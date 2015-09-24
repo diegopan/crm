@@ -1,17 +1,22 @@
-angular.module('crm.controllers')
-    .controller('MemberRemoveController', ['$scope', '$location', '$routeParams', 'Member',
-        function ($scope, $location, $routeParams, Member) {
+(function(){
+    'use strict';
 
-        $scope.member = Member.get({id: $routeParams.id});
+    angular.module('crm.controllers')
+        .controller('UserRemoveController', ['$scope', '$location', '$routeParams', 'User',
+            function ($scope, $location, $routeParams, User) {
 
-        $scope.remove = function () {
 
-            if ($scope.form.$valid) {
-                $scope.member.$delete().then(function(){
-                    $location.path('/members');
-                });
-            }
+                $scope.user = User.get({id: $routeParams.id});
 
-        };
+                $scope.remove = function () {
 
-    }]);
+                    if ($scope.form.$valid) {
+                        $scope.user.$delete().then(function(){
+                            $location.path('/users');
+                        });
+                    }
+                };
+
+            }]);
+
+})();

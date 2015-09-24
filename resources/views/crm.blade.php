@@ -183,6 +183,8 @@
     <!-- CONTROLLERS: USER -->
     <script src="{{asset('build/js/controllers/user/user.list.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/controllers/user/user.new.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/controllers/user/user.edit.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/controllers/user/user.remove.js')}}" type="text/javascript"></script>
 
     <!-- CONTROLLERS: AGENDAMENTOS -->
     <script src="{{asset('build/js/controllers/agendamentos/atendimentos/agendamentos.atendimentos.js')}}" type="text/javascript"></script>

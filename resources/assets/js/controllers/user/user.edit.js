@@ -1,52 +1,84 @@
-angular.module('crm.controllers')
-    .controller('MemberEditController', ['$scope', '$location', '$routeParams', '$http', 'appConfig', 'Team', 'User', 'Member',
-        function ($scope, $location, $routeParams, $http, appConfig, Team, User, Member) {
+(function () {
+
+    "use strict";
 
 
-            $scope.team = {};
-            $scope.user = {};
-            $scope.member = Member.get({id: $routeParams.id},
-                function (response) {
-                    $scope.user.selected = User.get({id: $scope.member.user_id});
-                    $scope.team.selected = Team.get({id: $scope.member.team_id});
-                });
+    angular.module('crm.controllers')
+        .controller('UserEditController', ['$scope', '$location', '$routeParams', 'User', 'Group',
+            function ($scope, $location, $routeParams, User, Group) {
 
 
-            $scope.teams = [];
-            $scope.users = [];
+                var vm = this;
 
 
-            $http.get(appConfig.baseUrl + '/user/search')
-                .then(function (response) {
-                    $scope.users = response.data
-                });
+                vm.user = User.get({id: $routeParams.id},
+                    function (response) {
+                         Group.get({id: response.group_id}, function(resp){
+                             vm.selectedGroup = resp;
+                        });
 
 
-            $http.get(appConfig.baseUrl + '/team')
-                .then(function (response) {
-                    $scope.teams = response.data
-                });
-
-
-            $scope.resetUser = function ($item) {
-                $scope.member.user_id = $item.id;
-            };
-
-
-            $scope.resetTeam = function ($item) {
-                $scope.member.team_id = $item.id;
-            };
-
-
-            $scope.save = function () {
-
-                if ($scope.form.$valid) {
-                    Member.update({id: $scope.member.id}, $scope.member, function () {
-                        $location.path('/members');
                     });
 
-                }
+                /**
+                 * @description Mostra o nome do grupo selecionado no campo de busca.
+                 * @param group
+                 */
+                vm.formatGroup = function (group) {
+                    if(group){
+                        return group.name;
+                    }
+                };
 
-            };
 
-        }]);
+                /**
+                 * @description Pesquisa um grupo usando o parametro passado.
+                 * @param param
+                 * @returns {object}
+                 */
+                vm.getGroups = function(param){
+                    return Group.query({
+                        search: param,
+                        searchFields: 'name:like'
+                    }).$promise;
+                };
+
+
+
+                /**
+                 * Evento disparado quando um grupo é selecionado no campo de busca.
+                 * @param group {object}
+                 * @returns {string}
+                 */
+                vm.changeGroup = function (group) {
+
+                    if (group) {
+                        vm.user.group_id = group.id;
+                    }
+                    return '';
+                };
+
+
+
+                vm.update = function () {
+
+                        User.update({id: vm.user.id}, vm.user, function () {
+                            $location.path('/users');
+                        });
+
+                };
+
+
+                vm.updatePwd = function () {
+
+                        User.update({id: vm.user.id}, vm.user, function () {
+                            $location.path('/users');
+                        });
+
+                };
+
+
+
+            }]);
+
+})();

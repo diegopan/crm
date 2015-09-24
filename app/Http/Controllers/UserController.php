@@ -93,7 +93,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->service->update($request->all(), $id);
     }
 
     /**
@@ -104,6 +104,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->service->delete($id);
     }
 }

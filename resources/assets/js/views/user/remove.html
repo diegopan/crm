@@ -2,14 +2,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Exclus&atilde;o de Teleoperador</div>
+                <div class="panel-heading">Exclus&atilde;o de Usu&aacute;rio</div>
                 <div class="panel-body">
                         <div class="row">
                             <div class="col-xs-4">
-                                <h3>{{member.user.name}}:</h3>
+                                <h3>{{user.name}}:</h3>
                                 <ul class="list-unstyled">
-                                    <li><b>SAP: </b>{{member.sap}}</li>
-                                    <li><b>Equipe: </b>{{member.team.name}}</li>
+                                    <li><b>Login: </b>{{user.username}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -17,7 +16,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <input name="confirm" type="checkbox" required checked="false" ng-model="confirm">
-                                    <span class="text-danger">Tenho certeza que desejo excluir o teleoperador! <br/></span>
+                                    <span class="text-danger">Tenho certeza que desejo excluir o usu&aacute;rio! <br/></span>
                                 </div>
                             </div>
                         </form>
