@@ -25,6 +25,7 @@ return array(
     'CreateOauthSessionScopesTable' => $baseDir . '/database/migrations/2014_04_24_111109_create_oauth_session_scopes_table.php',
     'CreateOauthSessionsTable' => $baseDir . '/database/migrations/2014_04_24_111002_create_oauth_sessions_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreatePortfolioAttendanceTable' => $baseDir . '/database/migrations/2015_09_24_111526_create_portfolio_attendance_table.php',
     'CreatePortfolioConfigTable' => $baseDir . '/database/migrations/2015_08_06_201445_create_portfolio_config_table.php',
     'CreatePortfolioReschedulingTable' => $baseDir . '/database/migrations/2015_08_31_125742_create_portfolio_rescheduling_table.php',
     'CreatePortfolioTable' => $baseDir . '/database/migrations/2015_08_04_205657_create_portfolio_table.php',

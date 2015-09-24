@@ -92,6 +92,8 @@ Route::group(['middleware' => 'oauth'], function () {
 
 
 
+    Route::resource('attendance', 'PortfolioAttendanceController', ['except' => ['create', 'edit']]);
+
     /*
      * Sale Routes
      */
