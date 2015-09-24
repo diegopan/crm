@@ -222,6 +222,7 @@
     <script src="{{asset('build/js/services/cip.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/services/auth.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/services/auth-redirector.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/services/attendance.js')}}" type="text/javascript"></script>
 
 
     <!-------------------------------------------- DIRECTIVES --------------------------------------------------------->

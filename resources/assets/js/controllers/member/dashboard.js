@@ -1,11 +1,11 @@
-(function(){
+(function () {
     'use strict';
 
 
     angular.module('crm.controllers')
 
-        .controller('MemberDashboardController', ['$scope', '$cookies', '$routeParams', 'Portfolio', 'Sale', 'Cip',
-            function ($scope, $cookies, $routeParams,  Portfolio, Sale, Cip) {
+        .controller('MemberDashboardController', ['$scope', '$cookies', '$routeParams', 'Portfolio', 'Sale', 'Cip', 'Attendance',
+            function ($scope, $cookies, $routeParams, Portfolio, Sale, Cip, Attendance) {
 
                 var vm = this;
 
@@ -36,15 +36,11 @@
 
 
                 $scope.agSelected = '';
-                $scope.setAg = function(ag) {
+                $scope.setAg = function (ag) {
 
                     $scope.agSelected = ag.cod_cli;
 
                 };
-
-
-
-
 
 
                 /**
@@ -73,20 +69,11 @@
                 };
 
 
-
-
-
-
-
                 /* --------------------------------------BEGIN AGENDA STATS ------------------------------------------------*/
 
                 $scope.agenda = {
                     showStats: true
                 };
-
-
-
-
 
 
                 /*
@@ -134,7 +121,8 @@
                                 $scope.getAtendimentos();
                                 $scope.endRescheduling();
                             });
-                    };
+                    }
+                    ;
                 };
 
                 /*
@@ -154,13 +142,11 @@
                 };
 
 
-
-
                 /**
                  * Função que funciona como gatilho para mostrar o formulário de cadastro de pedidos.
                  * @param atendimento
                  */
-                $scope.initSales = function(portfolio){
+                $scope.initSales = function (portfolio) {
 
 
                     $scope.portfolio = portfolio;
@@ -190,7 +176,7 @@
                  * Função que funciona como gatilho para mostrar o formulário de cadastro de pedidos.
                  * @param atendimento
                  */
-                $scope.initAlSales = function(portfolio){
+                $scope.initAlSales = function (portfolio) {
 
                     $scope.portfolio = portfolio;
                     $scope.portfolio.client_id = portfolio.id;
@@ -216,9 +202,9 @@
                 };
 
 
-
-
                 $scope.endSales = function () {
+
+
                     $scope.agSelected = '';
                     $scope.search = '';
                     $scope.salesFormViewOnly.show = false;
@@ -230,6 +216,9 @@
                     $scope.pedido.client_id = '';
                     $scope.sales = '';
                     $scope.showCip = false;
+
+                    $scope.Status.getDaily();
+                    $scope.Status.getMonthly();
                 };
 
 
@@ -263,8 +252,6 @@
 
                     }
                 };
-
-
 
 
                 $scope.salesEditForm = {
@@ -325,7 +312,7 @@
                 };
 
 
-                $scope.endRemove = function(){
+                $scope.endRemove = function () {
 
 
                     $scope.salesEditForm.show = false;
@@ -374,10 +361,10 @@
 
 
                 /*-----------------------BEGIN CIP-----------------------------------------------------------------------*/
-                $scope.getTrimestralCnpj = function(portfolio){
+                $scope.getTrimestralCnpj = function (portfolio) {
 
 
-                    Cip.getTrimestralCnpj({cnpj:portfolio.cnpj},function(response){
+                    Cip.getTrimestralCnpj({cnpj: portfolio.cnpj}, function (response) {
                         $scope.cipData = response.success;
                     });
                 };
@@ -385,22 +372,36 @@
                 /*-----------------------END CIP-----------------------------------------------------------------------*/
 
 
-                $scope.initVendaAleatoria = function()
-                {
+                $scope.initVendaAleatoria = function () {
                     $scope.vendaAleatoria = true;
                 };
 
 
-                $scope.endVendaAleatoria = function()
-                {
+                $scope.endVendaAleatoria = function () {
                     $scope.vendaAleatoria = false;
+
                     $scope.endSales();
                 };
 
 
+
+                $scope.finalize = function () {
+
+                    var portfolio_id = $scope.portfolio.portfolio_id;
+
+                    var attendance = new Attendance();
+
+                    attendance.portfolio_id = portfolio_id;
+
+                    attendance.$save().then(function (resp) {
+                        $scope.getAtendimentos();
+                        $scope.endSales();
+                    });
+                };
+
+                console.log($scope);
+
             }]);
-
-
 
 
 

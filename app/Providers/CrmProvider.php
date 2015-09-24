@@ -32,5 +32,6 @@ class CrmProvider extends ServiceProvider
         $this->app->bind("Crm\Repositories\UserRepository","Crm\Repositories\UserRepositoryEloquent");
         $this->app->bind("Crm\Repositories\SaleRepository","Crm\Repositories\SaleRepositoryEloquent");
         $this->app->bind("Crm\Repositories\PortfolioReschedulingRepository","Crm\Repositories\PortfolioReschedulingRepositoryEloquent");
+        $this->app->bind("Crm\Repositories\PortfolioAttendanceRepository","Crm\Repositories\PortfolioAttendanceRepositoryEloquent");
     }
 }
