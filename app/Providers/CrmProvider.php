@@ -23,7 +23,7 @@ class CrmProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind("Crm\Repositories\UserGroupRepository","Crm\Repositories\UserGRoupRepositoryEloquent");
+        $this->app->bind("Crm\Repositories\UserGroupRepository","Crm\Repositories\UserGroupRepositoryEloquent");
         $this->app->bind("Crm\Repositories\ClientRepository","Crm\Repositories\ClientRepositoryEloquent");
         $this->app->bind("Crm\Repositories\TeamRepository","Crm\Repositories\TeamRepositoryEloquent");
         $this->app->bind("Crm\Repositories\MemberRepository","Crm\Repositories\MemberRepositoryEloquent");
