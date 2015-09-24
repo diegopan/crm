@@ -2,50 +2,25 @@
 
 namespace Crm\Http\Controllers;
 
-use Crm\Repositories\UserRepository;
-use Crm\Services\UserService;
+use Crm\Services\UserGroupService;
 use Illuminate\Http\Request;
-
 use Crm\Http\Requests;
-use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
-class UserController extends Controller
+
+class UserGroupController extends Controller
 {
-
-
     /**
-     * @var UserService
+     * @var UserGroupService
      */
     private $service;
-    /**
-     * @var UserRepository
-     */
-    private $repository;
 
     /**
-     * @param UserService $service
-     * @param UserRepository $repository
+     * @param UserGroupService $service
      */
-    public function __construct(UserService $service, UserRepository $repository){
-
+    public function __construct(UserGroupService $service){
         $this->service = $service;
-        $this->repository = $repository;
     }
 
-
-
-    public function authenticated()
-    {
-        $userId = Authorizer::getResourceOwnerId();
-        return response()->json($this->repository->with(['group','member'])->find($userId));
-    }
-
-
-
-    public function search()
-    {
-        return $this->service->search();
-    }
 
 
     /**
@@ -59,7 +34,6 @@ class UserController extends Controller
     }
 
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -68,8 +42,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->service->save($request->all());
+        return $this->service->store($request->all());
     }
+
 
     /**
      * Display the specified resource.
@@ -95,6 +70,7 @@ class UserController extends Controller
     {
         return $this->service->update($request->all(), $id);
     }
+
 
     /**
      * Remove the specified resource from storage.

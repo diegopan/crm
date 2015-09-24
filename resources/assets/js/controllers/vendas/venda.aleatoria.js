@@ -36,25 +36,19 @@
                 /**
                  * Clients List
                  */
-                vm.clients = Client.query();
+               // vm.clients = Client.query();
 
 
                 /**
                  * @description Mostra a razão social do cliente selecionado no campo de busca.
-                 * @param id
+                 * @param cli
                  */
-                vm.formatClient = function (id) {
-                    if (id) {
-                        for (var i in vm.clients) {
-                            if (vm.clients[i].id == id) {
-                                return vm.clients[i].razao;
-                            }
-                            ;
-                        }
-                        ;
+                vm.formatClient = function (cli) {
+
+                    if(cli){
+                        return cli.razao;
                     }
-                    ;
-                    return '';
+
                 };
 
 
@@ -75,7 +69,6 @@
                  */
                 vm.changeCli = function (cli) {
 
-
                     if (cli) {
 
                         Cip.getTrimestralCnpj({cnpj: cli.cnpj},
@@ -91,7 +84,7 @@
                             });
 
 
-                    };
+                    }
                     return '';
                 };
 

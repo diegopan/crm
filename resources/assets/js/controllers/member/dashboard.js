@@ -4,8 +4,8 @@
 
     angular.module('crm.controllers')
 
-        .controller('MemberDashboardController', ['$scope', '$cookies', '$routeParams', 'Portfolio', 'Sale', 'Cip', 'Client',
-            function ($scope, $cookies, $routeParams,  Portfolio, Sale, Cip, Client) {
+        .controller('MemberDashboardController', ['$scope', '$cookies', '$routeParams', 'Portfolio', 'Sale', 'Cip',
+            function ($scope, $cookies, $routeParams,  Portfolio, Sale, Cip) {
 
                 var vm = this;
 

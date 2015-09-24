@@ -32,7 +32,13 @@ Route::group(['middleware' => 'oauth'], function () {
      * User  Routes
      */
      Route::get('user/authenticated', ['uses' => 'UserController@authenticated']);
-    Route::resource('user', 'UserController', ['except' => ['create', 'edit']]);;
+    Route::resource('user', 'UserController', ['except' => ['create', 'edit']]);
+
+
+    /*
+     * User Group Routes
+     */
+    Route::resource('group', 'UserGroupController', ['except' => ['create', 'edit']]);
 
 
     /*

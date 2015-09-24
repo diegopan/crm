@@ -12,6 +12,12 @@ use Crm\Entities\UserGroup;
  */
 class UserGroupRepositoryEloquent extends BaseRepository implements UserGroupRepository
 {
+
+    protected $fieldSearchable = [
+        'name'
+    ];
+
+
     /**
      * Specify Model class name
      *
@@ -27,6 +33,6 @@ class UserGroupRepositoryEloquent extends BaseRepository implements UserGroupRep
      */
     public function boot()
     {
-        $this->pushCriteria( app(RequestCriteria::class) );
+        $this->pushCriteria( app('Prettus\Repository\Criteria\RequestCriteria') );
     }
 }

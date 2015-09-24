@@ -74,8 +74,12 @@
 
 
                                 <td class="numeric text-center">
-                                    <a ng-href="#/user/{{o.id}}/edit" data-title="Editar" tooltip="Editar">
+                                    <a ng-href="#/users/{{o.id}}/edit" tooltip="Editar">
                                         <i class="icon-note font-blue-ebonyclay"></i>
+                                    </a> |
+
+                                    <a ng-href="#/users/{{o.id}}/remove" tooltip="Excluir">
+                                        <i class="fa fa-trash font-blue-ebonyclay"></i>
                                     </a>
                                 </td>
 

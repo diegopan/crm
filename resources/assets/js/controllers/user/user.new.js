@@ -1,52 +1,76 @@
-angular.module('crm.controllers')
-    .controller('UserNewController', ['$scope', '$location', 'Member', 'Team', 'appConfig', '$http',
-        function ($scope, $location, Member, Team, appConfig, $http) {
+(function () {
 
-            $scope.user = {};
-            $scope.users = [];
-
-            $scope.team = {};
-            $scope.teams = [];
+    "use strict";
 
 
+    angular.module('crm.controllers')
+        .controller('UserNewController', ['$scope', '$location', 'User', 'Group',
+            function ($scope, $location, User, Group) {
 
 
-            $http.get(appConfig.baseUrl + '/user/search')
-                .then(function (response) {
-                    $scope.users = response.data
-                });
+                var vm = this;
 
 
-            $http.get(appConfig.baseUrl + '/team')
-                .then(function (response) {
-                    $scope.teams = response.data
-                });
+                vm.user = {};
+                vm.user = new User();
+
+                vm.selectedGroup = {};
 
 
-            $scope.resetUser = function($item){
-                $scope.member.user_id = $item.id;
-            };
+                /**
+                 * @description Mostra o nome do grupo selecionado no campo de busca.
+                 * @param group
+                 */
+                vm.formatGroup = function (group) {
+                    if(group){
+                        return group.name;
+                    }
+                };
 
 
-            $scope.resetTeam = function($item){
-                $scope.member.team_id = $item.id;
-            };
+                /**
+                 * @description Pesquisa um grupo usando o parametro passado.
+                 * @param param
+                 * @returns {object}
+                 */
+                vm.getGroups = function(param){
+                    return Group.query({
+                        search: param,
+                        searchFields: 'name:like'
+                    }).$promise;
+                };
 
 
 
-            $scope.member = new Member();
+                /**
+                 * Evento disparado quando um grupo é selecionado no campo de busca.
+                 * @param group {object}
+                 * @returns {string}
+                 */
+                vm.changeGroup = function (group) {
 
-            $scope.save = function () {
-
-                if ($scope.form.$valid) {
-                    $scope.member.$save().then(function () {
-                        $location.path('/members');
-                    }, function (response) {
-                        console.log(response);
-                    });
-                }
-
-            };
+                    if (group) {
+                        vm.user.group_id = group.id;
+                    }
+                    return '';
+                };
 
 
-        }]);
+
+
+
+                vm.save = function () {
+
+                    if ($scope.form.$valid) {
+
+                        console.log(vm.user);
+                        vm.user.$save().then(function () {
+                            $location.path('/users');
+                        });
+                    }
+                };
+
+
+            }]);
+
+})();
