@@ -182,6 +182,7 @@
 
     <!-- CONTROLLERS: USER -->
     <script src="{{asset('build/js/controllers/user/user.list.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/controllers/user/user.new.js')}}" type="text/javascript"></script>
 
     <!-- CONTROLLERS: AGENDAMENTOS -->
     <script src="{{asset('build/js/controllers/agendamentos/atendimentos/agendamentos.atendimentos.js')}}" type="text/javascript"></script>
@@ -212,6 +213,7 @@
     <script src="{{asset('build/js/services/team.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/services/member.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/services/user.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/services/user-group.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/services/portfolio.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/services/sale.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/services/status.js')}}" type="text/javascript"></script>
@@ -221,6 +223,10 @@
 
 
     <!-------------------------------------------- DIRECTIVES --------------------------------------------------------->
+
+    <script src="{{asset('build/js/directives/user/password-compare.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/directives/user/password-special.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/directives/user/username-verify.js')}}" type="text/javascript"></script>
 
     <!-- AGENDAMENTOS DIRECTIVES -->
     <script src="{{asset('build/js/directives/operador/agendamentos.js')}}" type="text/javascript"></script>

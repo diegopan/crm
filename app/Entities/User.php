@@ -17,8 +17,8 @@ class User extends Model implements Transformable, AuthenticatableContract, CanR
 {
     use TransformableTrait, Authenticatable, CanResetPassword, SoftDeletes;
 
-    protected $fillable = ['name', 'username', 'email', 'password'];
-    protected $hidden = ['password', 'remember_token'];
+    protected $fillable = ['group_id','name', 'username', 'password','recovery'];
+    protected $hidden = ['password', 'recovery', 'remember_token'];
 
 
 

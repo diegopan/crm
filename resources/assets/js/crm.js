@@ -110,6 +110,15 @@ app.config(['$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigP
                 }
             })
 
+            .when('/users/new', {
+                templateUrl: 'build/views/user/new.html',
+                controller: 'UserNewController',
+                controllerAs: 'UserNew',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+
             .when('/home', {
                 templateUrl: 'build/views/home.html',
                 controller: 'HomeController',

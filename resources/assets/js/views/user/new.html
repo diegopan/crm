@@ -2,66 +2,113 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Cadastro de Teleoperadores</div>
+                <div class="panel-heading">Cadastro de Usu&aacute;rios</div>
                 <div class="panel-body">
 
 
-                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()" novalidate>
+                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="UserNew.save()" novalidate>
 
                         <!-- user field -->
-                        <div class="form-group" ng-class="{'has-error':!form.user_id.$valid && form.user_id.$touched}">
-                            <label class="col-md-4 control-label">Usuário:</label>
+                        <div class="form-group" ng-class="{'has-error':!form.group_id.$valid && form.group_id.$touched}">
+                            <label class="col-md-4 control-label">Grupo:</label>
                             <div class="col-md-6">
+                                <!-- BEGIN Group FIELD -->
+                                <div class="input-icon">
+                                    <i class="fa fa-search"></i>
+                                    <input class="form-control" type="text" name="group_id"
+                                           placeholder="Selecione um grupo..."
+                                           ng-model="UserNew.selectedGroup"
+                                           typeahead="o as (o.name) for o in UserNew.getGroups($viewValue)|limitTo:10"
+                                           typeahead-input-formatter="UserNew.formatGroup($model)"
+                                           typeahead-on-select="UserNew.changeGroup($item)"
+                                           typeahead-min-length="3"
+                                           required/>
+                                </div>
 
-                                <ui-select ng-model="user.selected" theme="bootstrap" on-select="resetUser($item)" name="user_id" required>
-                                    <ui-select-match placeholder="Selecione ou pesquise um usuário na lista...">{{$select.selected.name}}</ui-select-match>
-                                    <ui-select-choices repeat="u in users | filter: $select.search">
-                                        <div ng-bind-html="u.name | highlight: $select.search"></div>
-                                        <small ng-bind-html="u.username | highlight: $select.search"></small>
-                                    </ui-select-choices>
-                                </ui-select>
-
-                                <div class="help-block" ng-messages="form.user_id.$error" ng-show="form.user_id.$touched">
+                                <div class="help-block" ng-messages="form.group_id.$error" ng-show="form.group_id.$touched">
                                     <div ng-message="required">Campo obrigatório</div>
                                 </div>
 
                             </div>
+
                         </div>
 
-                        <!-- team field -->
-                        <div class="form-group" ng-class="{'has-error':!form.team_id.$valid && form.team_id.$touched}">
-                            <label class="col-md-4 control-label">Equipe:</label>
+                        <!-- name field -->
+                        <div class="form-group" ng-class="{'has-error':!form.name.$valid && form.name.$touched}">
+                            <label class="col-md-4 control-label">Nome Completo:</label>
                             <div class="col-md-6">
-                                <ui-select ng-model="team.selected" theme="bootstrap" on-select="resetTeam($item)" name="team_id" required>
-                                    <ui-select-match placeholder="Selecione ou pesquise uma equipe na lista....">{{$select.selected.name}}</ui-select-match>
-                                    <ui-select-choices repeat="t in teams | filter: $select.search">
-                                        <div>
-                                            <small ng-bind-html="t.slug | highlight: $select.search"></small> -
-                                            <span ng-bind-html="t.name | highlight: $select.search"></span>
-                                        </div>
-                                    </ui-select-choices>
-                                </ui-select>
-                                <div class="help-block" ng-messages="form.team_id.$error" ng-show="form.team_id.$touched">
+                                <input type="text" class="form-control" name="name" ng-model="UserNew.user.name" required>
+                                <div class="help-block" ng-messages="form.name.$error" ng-show="form.name.$touched">
                                     <div ng-message="required">Campo obrigatório</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- SAP field -->
-                        <div class="form-group" ng-class="{'has-error':!form.sap.$valid && form.sap.$touched}">
-                            <label class="col-md-4 control-label">SAP</label>
+                        <!-- username field -->
+                        <div class="form-group" ng-class="{'has-error':!form.username.$valid && form.username.$touched}">
+                            <label class="col-md-4 control-label">Login:</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="sap" ng-model="member.sap" required>
-                                <div class="help-block" ng-messages="form.sap.$error" ng-show="form.sap.$touched">
+                                <input type="text" class="form-control" name="username" ng-model="UserNew.user.username"
+                                       user-verify required>
+                                <div class="help-block" ng-messages="form.username.$error" ng-show="form.username.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                    <div ng-message="unique">Este login já está sendo utilizado</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- password field -->
+                        <div class="form-group" ng-class="{'has-error':!form.password.$valid && form.password.$touched}">
+                            <label class="col-md-4 control-label">Senha: </label>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password" ng-model="UserNew.user.password"
+                                       minlength="6" maxlength="12" pwd-esp required>
+
+                                <div class="help-block">
+                                       <span><i class="fa fa-info-circle font-blue"></i> <strong>Aten&ccedil;&atilde;o ao escolher a senha!</strong></span>
+                                        <ul class="list">
+                                            <li>M&iacute;nimo 6 caracteres</li>
+                                            <li>M&aacute;ximo 12 caracteres</li>
+                                            <li>Deve conter letras e números</li>
+                                            <li>Deve conter uma letra MAI&Uacute;SCULA</li>
+                                            <li>Deve conter ao menos um dos caracteres a seguir: <code>Z @ # $ % !</code> </li>
+                                            <li><span class="font-red bold">Não</span> deve conter sequências de repetições como: <span>"aaaa"</span> </li>
+                                            <li><span class="font-red bold">Não</span> deve conter espaços em branco. </li>
+                                        </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- password field -->
+                        <div class="form-group" ng-class="{'has-error':!form.passwordre.$valid && form.passwordre.$touched}">
+                            <label class="col-md-4 control-label">Confirme a Senha:</label>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="passwordre" ng-model="UserNew.passwordRe" password-compare="UserNew.user.password" required>
+                                <div class="help-block" ng-messages="form.passwordre.$error" ng-show="form.passwordre.$touched">
+                                    <div ng-message="required">Campo obrigatório</div>
+                                    <div ng-message="passwordCompare">As senhas precisam ser iguais.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- username field -->
+                        <div class="form-group" ng-class="{'has-error':!form.recovery.$valid && form.recovery.$touched}">
+                            <label class="col-md-4 control-label">Frase de Segurança:</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="recovery" ng-model="UserNew.user.recovery" required>
+                                <div class="help-block">
+                                    <span><i class="fa fa-info-circle font-blue"></i> Uma palavra ou frase que será solicitada caso você esqueça sua senha.</span>
+                                </div>
+                                <div class="help-block" ng-messages="form.recovery.$error" ng-show="form.recovery.$touched">
                                     <div ng-message="required">Campo obrigatório</div>
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary" ng-disabled="!form.$valid">Salvar</button>
-
                             </div>
                         </div>
                     </form>

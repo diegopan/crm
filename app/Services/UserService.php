@@ -102,6 +102,23 @@ class UserService
 
     public function save(array $data)
     {
+        if($data['password']){
+            $data['password'] = bcrypt($data['password']);
+        }else{
+            $data['password'] = bcrypt($data['init@123']);
+        }
+
+
+        if($data['recovery']){
+            $data['recovery'] = bcrypt($data['recovery']);
+        }else{
+            $data['recovery'] = bcrypt($data['panpharma']);
+        }
+
+        $data['remember_token'] = str_random(10);
+
+
+
         try {
             return response()->json(['success' => $this->repository->create($data)]);
         } catch (ValidatorException $e) {
