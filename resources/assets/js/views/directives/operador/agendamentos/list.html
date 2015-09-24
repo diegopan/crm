@@ -99,11 +99,15 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <div class="todo-taskbody-date pull-right">
 
-                                                    <a class="btn btn-circle btn-sm btn-default" data-ng-click="initRescheduling()">
+                                                    <a class="btn btn-circle btn-sm btn-default" data-ng-click="finalize()" ng-hide="vendaAleatoria">
+                                                        <i class="font-blue  icon-power"></i>&nbsp;Finalizar &nbsp;
+                                                    </a>
+
+                                                    <a class="btn btn-circle btn-sm btn-default" data-ng-click="initRescheduling()" ng-hide="vendaAleatoria">
                                                         <i class="font-blue fa fa-clock-o"></i>&nbsp;Reagendar &nbsp;
                                                     </a>
 
-                                                    <a class="btn btn-circle btn-sm btn-default" data-ng-click="endSales()">
+                                                    <a class="btn btn-circle btn-sm btn-default" data-ng-click="endSales()" ng-hide="vendaAleatoria">
                                                         &nbsp;<i class="font-red fa fa-arrow-left"></i>&nbsp;Voltar
                                                     </a>
 

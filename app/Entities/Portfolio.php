@@ -63,4 +63,11 @@ class Portfolio extends Model implements Transformable
         return $this->hasOne(PortfolioConfig::class);
     }
 
+
+
+    public function attendances()
+    {
+        return $this->hasMany(PortfolioAttendance::class);
+    }
+
 }

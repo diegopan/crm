@@ -142,17 +142,27 @@ class PortfolioService
                     ->select('portfolio_reschedulings.portfolio_id')
                     ->get();
 
-                $except = [];
+
+                $queryFinalized = DB::table('portfolio_attendances')
+                    ->where('portfolio_attendances.created_at', '>=', $today)
+                    ->select('portfolio_attendances.portfolio_id')
+                    ->get();
+
+                $except = [];$finalized = [];
 
                 foreach ($queryExcpt as $ob) {
                     $except[] = $ob->portfolio_id;
+                }
+
+                foreach ($queryFinalized as $ob) {
+                    $finalized[] = $ob->portfolio_id;
                 }
 
 
                 /*
                  * Select que busca todos os clientes da carteira, que possuem configuração de atendimento com horário
                  * marcado para o dia corrente.
-                 * Esta select exclui os clientes que possuem reagendamento.
+                 * Esta select exclui os clientes que possuem reagendamento e também os clientes com atendimento finalizado do dia corrente.
                  */
                 $query1 = DB::table('portfolios')
                     ->join('clients', 'portfolios.client_id', '=', 'clients.id')
@@ -161,6 +171,7 @@ class PortfolioService
                     ->where('portfolios.member_id', '=', $member_id)
                     ->whereNotNull("portfolio_configs.$weekDay")
                     ->whereNotIn('portfolios.id', $except)
+                    ->whereNotIn('portfolios.id', $finalized)
                     ->select('portfolios.id as portfolio_id', 'portfolios.client_id as client_id', 'portfolios.team_id as team_id', 'portfolios.responsible as contato', 'portfolios.phone as fone', 'portfolios.email as email',
                         'clients.cnpj as cnpj', 'clients.cod as cod_cli', 'clients.razao as razao', 'clients.uf as uf', "portfolio_configs.$weekDay as horario");
 
@@ -168,6 +179,7 @@ class PortfolioService
                 /*
                  * Select que busca todos os clientes de uma carteira que possuem reagendamento no dia corrente.
                  * Esta select se une à select anterior e em seguida os registros são ordenados por horario.
+                 * Esta select exclui todos os clientes com atendimento finalizado do dia corrente.
                  */
                 $query2 = DB::table('portfolios')
                     ->join('clients', 'portfolios.client_id', '=', 'clients.id')
@@ -176,6 +188,7 @@ class PortfolioService
                     ->where('portfolios.member_id', '=', $member_id)
                     ->where('portfolio_reschedulings.created_at', '>=', $today)
                     ->whereNotNull('portfolio_reschedulings.newtime')
+                    ->whereNotIn('portfolios.id', $finalized)
                     ->select('portfolios.id as portfolio_id', 'portfolios.client_id as client_id', 'portfolios.team_id as team_id', 'portfolios.responsible as contato', 'portfolios.phone as fone', 'portfolios.email as email',
                         'clients.cnpj as cnpj', 'clients.cod as cod_cli', 'clients.razao as razao', 'clients.uf as uf', "portfolio_reschedulings.newtime as horario")
                     ->union($query1)
