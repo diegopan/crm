@@ -46,7 +46,13 @@
                 vm.formatClient = function (cli) {
 
                     if(cli){
-                        return cli.razao;
+                        if(cli.portfolio){
+                            return cli.razao + ' - Possui Carteira!';
+                        }
+
+                        return cli.razao + '<i class="fa fa-warning"></i>';
+
+
                     }
 
                 };
@@ -56,7 +62,8 @@
                 vm.getClients = function(param){
                     return Client.query({
                         search: param,
-                        searchFields: 'cnpj:like'
+                        searchFields: 'cnpj:like',
+                        with: 'portfolio',
                     }).$promise;
                 };
 

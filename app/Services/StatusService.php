@@ -82,8 +82,8 @@ class StatusService
         $daily = [
             'agendamentos' => count($daily_total),
             'posit' => count($daily_posit),
-            'venda' => number_format($daily_sales[0]->venda,2,',','.'),
-            'tiket' => number_format($avg_tiket[0]->avg_tiket,2,',','.')
+            'venda' => number_format($daily_sales[0]->venda,0,',','.'),
+            'tiket' => number_format($avg_tiket[0]->avg_tiket,0,',','.')
         ];
 
 
@@ -132,8 +132,8 @@ class StatusService
         $monthly = [
             'agendamentos' => count($monthly_total),
             'posit' => count($monthly_posit),
-            'venda' => number_format($monthly_sales[0]->venda,2,',','.'),
-            'tiket' => number_format($avg_tiket[0]->avg_tiket,2,',','.')
+            'venda' => number_format($monthly_sales[0]->venda,0,',','.'),
+            'tiket' => number_format($avg_tiket[0]->avg_tiket,0,',','.')
         ];
 
 

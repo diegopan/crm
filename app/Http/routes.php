@@ -114,6 +114,7 @@ Route::group(['middleware' => 'oauth'], function () {
 
     Route::group(['prefix' => 'cip'], function(){
         Route::get('cnpj/{cnpj}/tri','CipController@getTrimestralCnpj');
+        Route::get('cnpj/{cnpj}/month','CipController@getMesAnteriorCnpj');
         Route::get('carteira/{memberId}/tri','CipController@getTrimestralCarteira');
     });
 

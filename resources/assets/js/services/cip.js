@@ -7,6 +7,11 @@ angular.module('crm.services')
                 url: appConfig.baseUrl + '/cip/cnpj/:cnpj/tri'
             },
 
+            getLastMonthCnpj: {
+                method: 'get',
+                url: appConfig.baseUrl + '/cip/cnpj/:cnpj/month'
+            },
+
             getTrimestralCarteira: {
                 method: 'get',
                 url: appConfig.baseUrl + '/cip/carteira/:id/tri'
