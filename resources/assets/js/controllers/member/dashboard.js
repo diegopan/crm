@@ -435,6 +435,7 @@
                 $scope.endVendaAleatoria = function () {
                     $scope.vendaAleatoria = false;
                     $scope.endSales();
+
                 };
 
                 $scope.finalize = function () {

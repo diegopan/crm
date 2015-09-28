@@ -50,7 +50,7 @@
                             return cli.razao + ' - Possui Carteira!';
                         }
 
-                        return cli.razao + '<i class="fa fa-warning"></i>';
+                        return cli.razao;
 
 
                     }
