@@ -27,6 +27,13 @@ class CipController extends Controller
 
     }
 
+
+    public function getMesAnteriorCnpj($cnpj){
+
+        return $this->service->getMesAnteriorCnpj($cnpj);
+
+    }
+
     public function getTrimestralCarteira($carteira){
 
         return $this->service->getTrimestralCarteira($carteira);

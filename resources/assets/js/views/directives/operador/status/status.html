@@ -114,42 +114,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-3 hide">
-            <div class="table-scrollable">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th class="text-center">
-                            Projeção&nbsp;&nbsp;<i class="fa fa-line-chart"></i>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs green-meadow-stripe">
-                                <i class="fa fa-check"></i>&nbsp; 15 / 25 </a>
-                        </td>
 
-                    </tr>
-                    <tr>
-                        <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs blue-madison-stripe">
-                                <i class="fa fa-usd"></i>&nbsp; 2.354,00 </a>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs blue-ebonyclay-stripe">
-                                <i class="fa fa-usd"></i>&nbsp; 2.354,00 </a>
-                        </td>
-
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
         <div class="clearfix"></div>
         <br/><br/>
@@ -208,19 +173,19 @@
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Ativo: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_televendas}}</span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_televendas}} :  <span class="font-purple-seance">{{Cip.trimestral.perc_televendas}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Receptivo: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_telemarketing}}</span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_telemarketing}} :  <span class="font-purple-seance">{{Cip.trimestral.perc_telemarketing}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Eletrônico: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_eletronico}}</span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_eletronico}} : <span class="font-purple-seance">{{Cip.trimestral.perc_eletronico}}%</span> </span>
                             </td>
                         </tr>
                         </tbody>
@@ -241,25 +206,25 @@
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Genéricos: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_generico}}</span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_generico}} : <span class="font-purple-seance">{{Cip.trimestral.perc_generico}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Hig. Beleza: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_hb}}</span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_hb}} : <span class="font-purple-seance">{{Cip.trimestral.perc_hb}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">OTC: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_otc}}</span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_otc}} : <span class="font-purple-seance">{{Cip.trimestral.perc_otc}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
-                                <span class="bold text-blue">Outros: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_outros}}</span>
+                                <span class="bold text-blue">&Eacute;tico: </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_outros}} : <span class="font-purple-seance">{{Cip.trimestral.perc_outros}}%</span></span>
                             </td>
                         </tr>
                         </tbody>
@@ -267,8 +232,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </div>
 </div>

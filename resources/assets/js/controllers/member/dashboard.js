@@ -32,6 +32,7 @@
 
 
                 $scope.cipData = {};
+                $scope.cipLastMonth = {};
                 $scope.showCip = false;
 
 
@@ -122,7 +123,7 @@
                                 $scope.endRescheduling();
                             });
                     }
-                    ;
+
                 };
 
                 /*
@@ -144,10 +145,13 @@
 
                 /**
                  * Função que funciona como gatilho para mostrar o formulário de cadastro de pedidos.
-                 * @param atendimento
+                 * @param portfolio
                  */
                 $scope.initSales = function (portfolio) {
 
+
+                    $scope.cipData = $scope.getTrimestralCnpj(portfolio);
+                    $scope.showCip = true;
 
                     $scope.portfolio = portfolio;
 
@@ -157,24 +161,23 @@
                     $scope.salesFormViewOnly.show = true;
                     $scope.salesFormViewOnly.setFocus = true;
 
-
-                    $scope.cipData = $scope.getTrimestralCnpj(portfolio)
-                    $scope.showCip = true;
-
-
                     $('#saleNumber').focus();
 
 
                     Sale.getSales({cliId: portfolio.client_id, memberId: $cookies.getObject('user').member.id},
                         function (response) {
+
                             $scope.sales = response.success;
+
                         });
+
+
                 };
 
 
                 /**
                  * Função que funciona como gatilho para mostrar o formulário de cadastro de pedidos.
-                 * @param atendimento
+                 * @param portfolio
                  */
                 $scope.initAlSales = function (portfolio) {
 
@@ -257,7 +260,7 @@
                 $scope.salesEditForm = {
                     client: '',
                     time: '',
-                    show: false,
+                    show: false
                 };
 
                 /*
@@ -298,7 +301,7 @@
                             $scope.initSales($scope.portfolio);
                         });
                     }
-                }
+                };
 
 
                 /*
@@ -308,7 +311,7 @@
                 $scope.salesRemoveForm = {
                     client: '',
                     time: '',
-                    show: false,
+                    show: false
                 };
 
 
@@ -319,7 +322,7 @@
                     $scope.salesRemoveForm.show = false;
                     $scope.salesFormViewOnly.show = true;
 
-                }
+                };
 
                 /*
                  |@function editSale
@@ -357,19 +360,71 @@
 
                         });
                     }
-                }
+                };
 
 
                 /*-----------------------BEGIN CIP-----------------------------------------------------------------------*/
                 $scope.getTrimestralCnpj = function (portfolio) {
 
+                    Cip.getTrimestralCnpj({cnpj: portfolio.cnpj},
+                        function (response) {
+                            $scope.cipData = response.success;
 
-                    Cip.getTrimestralCnpj({cnpj: portfolio.cnpj}, function (response) {
-                        $scope.cipData = response.success;
+                            Cip.getLastMonthCnpj({cnpj: portfolio.cnpj},
+                            function(resp){
+                                $scope.cipLastMonth = resp.success;
+                                $scope.cipStatus = {
+
+                                    tkt_med_up : $scope.cipData.ticket_medio < $scope.cipLastMonth.ticket_medio,
+                                    tkt_med_dw : $scope.cipData.ticket_medio > $scope.cipLastMonth.ticket_medio,
+                                    tkt_med_eq : $scope.cipData.ticket_medio == $scope.cipLastMonth.ticket_medio,
+
+                                    med_sem_up : $scope.cipData.media_semanal < $scope.cipLastMonth.media_semanal,
+                                    med_sem_dw : $scope.cipData.media_semanal > $scope.cipLastMonth.media_semanal,
+                                    med_sem_eq : $scope.cipData.media_semanal == $scope.cipLastMonth.media_semanal,
+
+                                    med_tri_up : $scope.cipData.venda_bruta < $scope.cipLastMonth.venda_bruta,
+                                    med_tri_dw : $scope.cipData.venda_bruta > $scope.cipLastMonth.venda_bruta,
+                                    med_tri_eq : $scope.cipData.venda_bruta == $scope.cipLastMonth.venda_bruta,
+
+                                    ativo_up : $scope.cipData.valor_televendas < $scope.cipLastMonth.valor_televendas,
+                                    ativo_dw : $scope.cipData.valor_televendas > $scope.cipLastMonth.valor_televendas,
+                                    ativo_eq : $scope.cipData.valor_televendas == $scope.cipLastMonth.valor_televendas,
+
+                                    recp_up : $scope.cipData.valor_telemarketing < $scope.cipLastMonth.valor_telemarketing,
+                                    recp_dw : $scope.cipData.valor_telemarketing > $scope.cipLastMonth.valor_telemarketing,
+                                    recp_eq : $scope.cipData.valor_telemarketing == $scope.cipLastMonth.valor_telemarketing,
+
+                                    elet_up : $scope.cipData.valor_eletronico < $scope.cipLastMonth.valor_eletronico,
+                                    elet_dw : $scope.cipData.valor_eletronico > $scope.cipLastMonth.valor_eletronico,
+                                    elet_eq : $scope.cipData.valor_eletronico == $scope.cipLastMonth.valor_eletronico,
+
+                                    gen_up : $scope.cipData.valor_generico < $scope.cipLastMonth.valor_generico,
+                                    gen_dw : $scope.cipData.valor_generico > $scope.cipLastMonth.valor_generico,
+                                    gen_eq : $scope.cipData.valor_generico == $scope.cipLastMonth.valor_generico,
+
+                                    hb_up : $scope.cipData.valor_hb < $scope.cipLastMonth.valor_hb,
+                                    hb_dw : $scope.cipData.valor_hb > $scope.cipLastMonth.valor_hb,
+                                    hb_eq : $scope.cipData.valor_hb == $scope.cipLastMonth.valor_hb,
+
+                                    otc_up : $scope.cipData.valor_otc < $scope.cipLastMonth.valor_otc,
+                                    otc_dw : $scope.cipData.valor_otc > $scope.cipLastMonth.valor_otc,
+                                    otc_eq : $scope.cipData.valor_otc == $scope.cipLastMonth.valor_otc,
+
+                                    etc_up : $scope.cipData.valor_outros < $scope.cipLastMonth.valor_outros,
+                                    etc_dw : $scope.cipData.valor_outros > $scope.cipLastMonth.valor_outros,
+                                    etc_eq : $scope.cipData.valor_outros == $scope.cipLastMonth.valor_outros
+
+                                };
+                            });
                     });
                 };
 
-                /*-----------------------END CIP-----------------------------------------------------------------------*/
+                $scope.$watch($scope.cipLastMonth, function(){
+                    return;
+                });
+
+                /*-----------------------END CIP----------------------------------------------------------------------*/
 
 
                 $scope.initVendaAleatoria = function () {
@@ -379,11 +434,8 @@
 
                 $scope.endVendaAleatoria = function () {
                     $scope.vendaAleatoria = false;
-
                     $scope.endSales();
                 };
-
-
 
                 $scope.finalize = function () {
 
@@ -398,14 +450,7 @@
                         $scope.endSales();
                     });
                 };
-
-                console.log($scope);
-
             }]);
-
-
-
-
 
 })();
 
