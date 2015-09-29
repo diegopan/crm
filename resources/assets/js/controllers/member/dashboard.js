@@ -149,6 +149,8 @@
                  */
                 $scope.initSales = function (portfolio) {
 
+                    console.log(portfolio);
+
 
                     $scope.cipData = $scope.getTrimestralCnpj(portfolio);
                     $scope.showCip = true;

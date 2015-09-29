@@ -2,35 +2,35 @@
 
     <div class="portlet-body">
 
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <div class="table-scrollable">
-                <table class="table table-bordered table-hover">
+                <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th class="text-center">
+                        <th class="text-center bg-green">
                             <i class="fa fa-line-chart"></i>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs green-meadow">
-                               Positivação </a>
+                        <td class="highlight text-center font-blue-ebonyclay bold">
+
+                               Positivação
                         </td>
 
                     </tr>
                     <tr>
-                        <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs blue-madison">
-                                 Venda </a>
+                        <td class="highlight text-center font-blue-ebonyclay bold">
+
+                                 Venda
                         </td>
 
                     </tr>
                     <tr>
-                        <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs blue-ebonyclay">
-                                Tiket Médio </a>
+                        <td class="highlight text-center font-blue-ebonyclay bold">
+
+                                Tiket Médio
                         </td>
 
                     </tr>
@@ -40,35 +40,31 @@
         </div>
         <div class="col-sm-3">
             <div class="table-scrollable" ng-init="[Status.getDaily(),Status.getMonthly()]">
-                <table class="table table-bordered table-hover">
+                <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th class="text-center">
-                            Hoje&nbsp;&nbsp;<a href="javascript:;" ng-click="Status.getDaily()"><i
-                                class="fa fa-refresh"></i></a>
+                        <th class="text-center bg-green">
+                            Hoje
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs green-meadow-stripe">
-                                <i class="fa fa-check"></i>&nbsp; {{Status.std.daily.posit}} /
-                                {{Status.std.daily.agendamentos}} </a>
+
+                                {{Status.std.daily.posit}} de {{Status.std.daily.agendamentos}}
                         </td>
 
                     </tr>
                     <tr>
                         <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs blue-madison-stripe">
-                                R$&nbsp; {{Status.std.daily.venda}} </a>
+                                R$&nbsp; {{Status.std.daily.venda}}
                         </td>
 
                     </tr>
                     <tr>
                         <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs blue-ebonyclay-stripe">
-                                R$&nbsp; {{Status.std.daily.tiket}} </a>
+                                R$&nbsp; {{Status.std.daily.tiket}}
                         </td>
 
                     </tr>
@@ -78,35 +74,31 @@
         </div>
         <div class="col-sm-3">
             <div class="table-scrollable">
-                <table class="table table-bordered table-hover">
+                <table class="table table-condensed">
                     <thead>
                     <tr>
-                        <th class="text-center">
-                            Mensal&nbsp;&nbsp;<a href="javascript:;" ng-click="Status.getMonthly()"><i
-                                class="fa fa-refresh"></i></a>
+                        <th class="text-center bg-green">
+                            Mensal
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs green-meadow-stripe">
-                                <i class="fa fa-check"></i>&nbsp; {{Status.std.monthly.posit}} /
-                                {{Status.std.monthly.agendamentos}}</a>
+
+                               {{Status.std.monthly.posit}} de {{Status.std.monthly.agendamentos}}
                         </td>
 
                     </tr>
                     <tr>
                         <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs blue-madison-stripe">
-                                R$&nbsp; {{Status.std.monthly.venda}} </a>
+                                R$&nbsp; {{Status.std.monthly.venda}}
                         </td>
 
                     </tr>
                     <tr>
                         <td class="highlight text-center">
-                            <a href="javascript:;" class="btn default btn-xs blue-ebonyclay-stripe">
-                                R$&nbsp; {{Status.std.monthly.tiket}} </a>
+                                R$&nbsp; {{Status.std.monthly.tiket}}
                         </td>
 
                     </tr>
@@ -120,17 +112,17 @@
         <br/><br/>
 
         <div class="caption" style="border-bottom: 1px solid #eee; padding-bottom: 10px;">
-            <i class="fa fa-calendar-check-o font-green-sharp"></i>
-            <span class="caption-helper font-green-sharp bold uppercase">Análise Trimestral da Carteira</span>
+            <i class="fa fa-calendar-check-o font-blue-ebonyclay"></i>
+            <span class="caption-helper font-blue-ebonyclay bold uppercase">Análise Trimestral da Carteira</span>
         </div>
         <br/>
         <div class="col-sm-12" ng-controller="CipController as Cip" ng-init="[Cip.getTrimestralCarteira()]">
             <div class="col-sm-4">
                 <div class="table-scrollable">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-condensed">
                         <thead>
                         <tr>
-                            <th class="text-center">
+                            <th class="text-center bg-green">
                                 Informações Gerais
                             </th>
                         </tr>
@@ -161,10 +153,10 @@
             </div>
             <div class="col-sm-4">
                 <div class="table-scrollable">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-condensed">
                         <thead>
                         <tr>
-                            <th class="text-center">
+                            <th class="text-center bg-green">
                                 Vendas / Canal
                             </th>
                         </tr>
@@ -173,19 +165,19 @@
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Ativo: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_televendas}} :  <span class="font-purple-seance">{{Cip.trimestral.perc_televendas}}%</span></span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_televendas}} -  <span class="font-purple-seance">{{Cip.trimestral.perc_televendas}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Receptivo: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_telemarketing}} :  <span class="font-purple-seance">{{Cip.trimestral.perc_telemarketing}}%</span></span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_telemarketing}} -  <span class="font-purple-seance">{{Cip.trimestral.perc_telemarketing}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Eletrônico: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_eletronico}} : <span class="font-purple-seance">{{Cip.trimestral.perc_eletronico}}%</span> </span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_eletronico}} - <span class="font-purple-seance">{{Cip.trimestral.perc_eletronico}}%</span> </span>
                             </td>
                         </tr>
                         </tbody>
@@ -194,10 +186,10 @@
             </div>
             <div class="col-sm-4">
                 <div class="table-scrollable">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-condensed">
                         <thead>
                         <tr>
-                            <th class="text-center">
+                            <th class="text-center bg-green">
                                 Segmento de Produtos
                             </th>
                         </tr>
@@ -206,25 +198,25 @@
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Genéricos: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_generico}} : <span class="font-purple-seance">{{Cip.trimestral.perc_generico}}%</span></span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_generico}} - <span class="font-purple-seance">{{Cip.trimestral.perc_generico}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">Hig. Beleza: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_hb}} : <span class="font-purple-seance">{{Cip.trimestral.perc_hb}}%</span></span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_hb}} - <span class="font-purple-seance">{{Cip.trimestral.perc_hb}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">OTC: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_otc}} : <span class="font-purple-seance">{{Cip.trimestral.perc_otc}}%</span></span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_otc}} - <span class="font-purple-seance">{{Cip.trimestral.perc_otc}}%</span></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="highlight text-left">
                                 <span class="bold text-blue">&Eacute;tico: </span>
-                                <span class="pull-right">R$ {{Cip.trimestral.valor_outros}} : <span class="font-purple-seance">{{Cip.trimestral.perc_outros}}%</span></span>
+                                <span class="pull-right">R$ {{Cip.trimestral.valor_outros}} - <span class="font-purple-seance">{{Cip.trimestral.perc_outros}}%</span></span>
                             </td>
                         </tr>
                         </tbody>

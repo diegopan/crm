@@ -60,6 +60,8 @@ angular.module('crm.controllers')
                         $scope.carteira = {};
                         $scope.carteira = response[0];
 
+                        console.log($scope.carteira);
+
                        // $scope.agendamentos = [$scope.agendamentos];
                     },
                     function (response) {
