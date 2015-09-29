@@ -52,18 +52,18 @@
             <div class="portlet">
                 <div class="portlet-body">
                     <!-- CIP trimestral -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="caption"
                              style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-left: 15px;">
                             <i class="fa fa-calendar-check-o font-blue-dark"></i>
                             <span class="caption-helper font-blue-dark bold uppercase">Análise Trimestral</span>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="table-scrollable">
-                                <table class="table table-bordered table-hover">
+                                <table class="table table-condensed">
                                     <thead>
                                     <tr>
-                                        <th class="text-center">
+                                        <th class="text-center bg-green">
                                             Informações Gerais
                                         </th>
                                     </tr>
@@ -92,12 +92,12 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="table-scrollable">
-                                <table class="table table-bordered table-hover">
+                                <table class="table table-condensed">
                                     <thead>
                                     <tr>
-                                        <th class="text-center">
+                                        <th class="text-center bg-green">
                                             Vendas por Canal
                                         </th>
                                     </tr>
@@ -128,12 +128,12 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="table-scrollable">
-                                <table class="table table-bordered table-hover">
+                                <table class="table table-condensed">
                                     <thead>
                                     <tr>
-                                        <th class="text-center">
+                                        <th class="text-center bg-green">
                                             Vendas por Segmento
                                         </th>
                                     </tr>
@@ -171,142 +171,50 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- CIP mes anterior -->
-                    <div class="col-sm-6">
-                        <div class="caption"
-                             style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-left: 15px;">
-                            <i class="fa fa-calendar-check-o font-blue-dark"></i>
-                            <span class="caption-helper font-blue-dark bold uppercase">Mês Anterior</span>
-                        </div>
-                        <div class="col-sm-12">
+                        <!-- Cip mês anterior -->
+                        <div class="col-sm-6">
                             <div class="table-scrollable">
-                                <table class="table table-bordered table-hover">
+                                <table class="table table-condensed">
                                     <thead>
                                     <tr>
-                                        <th class="text-center">
-                                            Informações Gerais
+                                        <th class="text-center bg-yellow">
+                                            Mês Anterior
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="highlight text-left">
-                                            <span class="bold text-blue">Ticket Médio: </span>
-                                            <span class="pull-right">R$ {{cipLastMonth.ticket_medio}}
-                                                <!--comparação em relação a média trimestral-->
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.tkt_med_up,'fa fa-arrow-down font-red':cipStatus.tkt_med_dw, 'fa fa-arrow-right font-blue':cipStatus.tkt_med_eq}"></i>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="highlight text-left">
-                                            <span class="bold text-blue">Méd. Semanal: </span>
-                                            <span class="pull-right">R$ {{cipLastMonth.media_semanal}}
-                                                <!--comparação em relação a média trimestral-->
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.med_sem_up,'fa fa-arrow-down font-red':cipStatus.med_sem_dw, 'fa fa-arrow-right font-blue':cipStatus.med_sem_eq}"></i>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="highlight text-left">
-                                            <span class="bold text-blue">Venda Bruta: </span>
-                                            <span class="pull-right">R$ {{cipLastMonth.venda_bruta}}
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.med_tri_up,'fa fa-arrow-down font-red':cipStatus.med_tri_dw, 'fa fa-arrow-right font-blue':cipStatus.med_tri_eq}"></i>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="table-scrollable">
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-center">
-                                            Vendas por Canal
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
+                                    <tr class="warning">
                                         <td class="highlight text-left">
                                             <span class="bold text-blue">Ativo: </span>
                                             <span class="pull-right">R$ {{cipLastMonth.valor_televendas}}
                                                 :  <span class="font-purple-seance">{{cipLastMonth.perc_televendas}}%</span>
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.ativo_up,'fa fa-arrow-down font-red':cipStatus.ativo_dw, 'fa fa-arrow-right font-blue':cipStatus.ativo_eq}"></i>
+                                                <i ng-class="{'fa fa-arrow-up font-blue':cipStatus.ativo_up,'fa fa-arrow-down font-red':cipStatus.ativo_dw, 'fa fa-arrow-right font-green':cipStatus.ativo_eq}"></i>
                                             </span>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="warning">
                                         <td class="highlight text-left">
                                             <span class="bold text-blue">Receptivo: </span>
                                             <span class="pull-right">R$ {{cipLastMonth.valor_telemarketing}}
                                                 :  <span class="font-purple-seance">{{cipLastMonth.perc_telemarketing}}%</span>
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.recp_up,'fa fa-arrow-down font-red':cipStatus.recp_dw, 'fa fa-arrow-right font-blue':cipStatus.recp_eq}"></i>
+                                                <i ng-class="{'fa fa-arrow-up font-blue':cipStatus.recp_up,'fa fa-arrow-down font-red':cipStatus.recp_dw, 'fa fa-arrow-right font-green':cipStatus.recp_eq}"></i>
                                             </span>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="warning">
                                         <td class="highlight text-left">
                                             <span class="bold text-blue">Eletrônico: </span>
                                             <span class="pull-right">R$ {{cipLastMonth.valor_eletronico}}
                                                 :  <span class="font-purple-seance">{{cipLastMonth.perc_eletronico}}%</span>
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.elet_up,'fa fa-arrow-down font-red':cipStatus.elet_dw, 'fa fa-arrow-right font-blue':cipStatus.elet_eq}"></i>
+                                                <i ng-class="{'fa fa-arrow-up font-blue':cipStatus.elet_up,'fa fa-arrow-down font-red':cipStatus.elet_dw, 'fa fa-arrow-right font-green':cipStatus.elet_eq}"></i>
                                             </span>
                                         </td>
                                     </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="table-scrollable">
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-center">
-                                            Vendas por Segmento
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
+                                    <tr class="warning">
                                         <td class="highlight text-left">
-                                            <span class="bold text-blue">Genéricos: </span>
-                                            <span class="pull-right">R$ {{cipLastMonth.valor_generico}}
-                                                :  <span class="font-purple-seance">{{cipLastMonth.perc_generico}}%</span>
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.gen_up,'fa fa-arrow-down font-red':cipStatus.gen_dw, 'fa fa-arrow-right font-blue':cipStatus.gen_eq}"></i>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="highlight text-left">
-                                            <span class="bold text-blue">Hig. Beleza: </span>
-                                            <span class="pull-right">R$ {{cipLastMonth.valor_hb}}
-                                                :  <span class="font-purple-seance">{{cipLastMonth.perc_hb}}%</span>
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.hb_up,'fa fa-arrow-down font-red':cipStatus.hb_dw, 'fa fa-arrow-right font-blue':cipStatus.hb_eq}"></i>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="highlight text-left">
-                                            <span class="bold text-blue">OTC: </span>
-                                            <span class="pull-right">R$ {{cipLastMonth.valor_otc}}
-                                                :  <span class="font-purple-seance">{{cipLastMonth.perc_otc}}%</span>
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.otc_up,'fa fa-arrow-down font-red':cipStatus.otc_dw, 'fa fa-arrow-right font-blue':cipStatus.otc_eq}"></i>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="highlight text-left">
-                                            <span class="bold text-blue">Ético: </span>
-                                            <span class="pull-right">R$ {{cipLastMonth.valor_outros}}
-                                                :  <span class="font-purple-seance">{{cipLastMonth.perc_outros}}%</span>
-                                                <i ng-class="{'fa fa-arrow-up font-green':cipStatus.etc_up,'fa fa-arrow-down font-red':cipStatus.etc_dw, 'fa fa-arrow-right font-blue':cipStatus.etc_eq}"></i>
+                                            <span class="bold text-blue">Venda Bruta: </span>
+                                            <span class="pull-right">R$ {{cipLastMonth.venda_bruta}}
+                                                <i ng-class="{'fa fa-arrow-up font-blue':cipStatus.med_tri_up,'fa fa-arrow-down font-red':cipStatus.med_tri_dw, 'fa fa-arrow-right font-green':cipStatus.med_tri_eq}"></i>
                                             </span>
                                         </td>
                                     </tr>
@@ -315,6 +223,8 @@
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>

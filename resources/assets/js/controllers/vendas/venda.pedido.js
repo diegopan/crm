@@ -43,6 +43,8 @@
                  */
                 vm.initSales = function(atendimento){
 
+                    console.log(atendimento);
+
                     vm.atendimento =atendimento;
                     $scope.agenda.showStats = false;
                     $scope.salesFormViewOnly.show = true;

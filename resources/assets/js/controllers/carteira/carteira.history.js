@@ -44,6 +44,7 @@ angular.module('crm.controllers')
 
 
             $scope.getHistory = function () {
+                console.log($routeParams);
                 Sale.getHistory({memberId: $cookies.getObject('user').member.id,cliId:$routeParams.cliId},
                     function (response) {
 
