@@ -25,7 +25,9 @@
                 /**
                  * Armazena as informações obtidas do CIP para o cliente selecionado.
                  */
-                vm.clientInfo;
+                vm.cipLastMonth;
+
+                vm.cipData;
 
                 /**
                  * Gatilho de controle para mostrar os dados trimestrais do cliente selecionado.
@@ -78,17 +80,13 @@
 
                     if (cli) {
 
-                        Cip.getTrimestralCnpj({cnpj: cli.cnpj},
-                            function (response) {
+                        vm.getTrimestralCnpj(cli);
 
-                                vm.clientInfo = response.success;
+
                                 vm.showCliStats = true;
                                 vm.initAleatorySales(cli);
 
-                            },
-                            function (response) {
-                                vm.showCliStats = false;
-                            });
+
 
 
                     }
@@ -111,7 +109,73 @@
 
                     $('#saleNumber').focus();
 
-                }
+                };
+
+
+
+                /*-----------------------BEGIN CIP-----------------------------------------------------------------------*/
+                vm.getTrimestralCnpj = function (portfolio) {
+
+                    Cip.getTrimestralCnpj({cnpj: portfolio.cnpj},
+                        function (response) {
+                            vm.cipData = response.success;
+
+                            Cip.getLastMonthCnpj({cnpj: portfolio.cnpj},
+                                function(resp){
+                                    vm.cipLastMonth = resp.success;
+
+                                    vm.cipStatus = {
+
+                                        tkt_med_up : vm.cipData.ticket_medio < vm.cipLastMonth.ticket_medio,
+                                        tkt_med_dw : vm.cipData.ticket_medio > vm.cipLastMonth.ticket_medio,
+                                        tkt_med_eq : vm.cipData.ticket_medio == vm.cipLastMonth.ticket_medio,
+
+                                        med_sem_up : vm.cipData.media_semanal < vm.cipLastMonth.media_semanal,
+                                        med_sem_dw : vm.cipData.media_semanal > vm.cipLastMonth.media_semanal,
+                                        med_sem_eq : vm.cipData.media_semanal == vm.cipLastMonth.media_semanal,
+
+                                        med_tri_up : vm.cipData.venda_bruta < vm.cipLastMonth.venda_bruta,
+                                        med_tri_dw : vm.cipData.venda_bruta > vm.cipLastMonth.venda_bruta,
+                                        med_tri_eq : vm.cipData.venda_bruta == vm.cipLastMonth.venda_bruta,
+
+                                        ativo_up : vm.cipData.valor_televendas < vm.cipLastMonth.valor_televendas,
+                                        ativo_dw : vm.cipData.valor_televendas > vm.cipLastMonth.valor_televendas,
+                                        ativo_eq : vm.cipData.valor_televendas == vm.cipLastMonth.valor_televendas,
+
+                                        recp_up : vm.cipData.valor_telemarketing < vm.cipLastMonth.valor_telemarketing,
+                                        recp_dw : vm.cipData.valor_telemarketing > vm.cipLastMonth.valor_telemarketing,
+                                        recp_eq : vm.cipData.valor_telemarketing == vm.cipLastMonth.valor_telemarketing,
+
+                                        elet_up : vm.cipData.valor_eletronico < vm.cipLastMonth.valor_eletronico,
+                                        elet_dw : vm.cipData.valor_eletronico > vm.cipLastMonth.valor_eletronico,
+                                        elet_eq : vm.cipData.valor_eletronico == vm.cipLastMonth.valor_eletronico,
+
+                                        gen_up : vm.cipData.valor_generico < vm.cipLastMonth.valor_generico,
+                                        gen_dw : vm.cipData.valor_generico > vm.cipLastMonth.valor_generico,
+                                        gen_eq : vm.cipData.valor_generico == vm.cipLastMonth.valor_generico,
+
+                                        hb_up : vm.cipData.valor_hb < vm.cipLastMonth.valor_hb,
+                                        hb_dw : vm.cipData.valor_hb > vm.cipLastMonth.valor_hb,
+                                        hb_eq : vm.cipData.valor_hb == vm.cipLastMonth.valor_hb,
+
+                                        otc_up : vm.cipData.valor_otc < vm.cipLastMonth.valor_otc,
+                                        otc_dw : vm.cipData.valor_otc > vm.cipLastMonth.valor_otc,
+                                        otc_eq : vm.cipData.valor_otc == vm.cipLastMonth.valor_otc,
+
+                                        etc_up : vm.cipData.valor_outros < vm.cipLastMonth.valor_outros,
+                                        etc_dw : vm.cipData.valor_outros > vm.cipLastMonth.valor_outros,
+                                        etc_eq : vm.cipData.valor_outros == vm.cipLastMonth.valor_outros
+
+                                    };
+                                });
+                        });
+                };
+
+                $scope.$watch(vm.cipLastMonth, function(){
+                    return;
+                });
+
+                /*-----------------------END CIP----------------------------------------------------------------------*/
 
 
 
