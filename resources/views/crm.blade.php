@@ -83,13 +83,14 @@
 
 <div class="page-container">
     <!-- BEGIN SIDEBAR -->
-    <div class="page-sidebar-wrapper">
+    <div class="page-sidebar-wrapper" ng-show="currentUser">
         <div class="page-sidebar navbar-collapse collapse">
-            <ul class="page-sidebar-menu page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-show="currentUser">
+            <!-- menu operadores -->
+            <ul class="page-sidebar-menu page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-if="currentGroup == 'CCMZ_Operador'">
                 <li class="start ">
                     <a ng-href="/#/agendamentos">
                         <i class="icon-home"></i>
-                        <span class="title">Dashboard</span>
+                        <span class="title">Agenda</span>
                         <span class="arrow "></span>
                     </a>
                 </li>
@@ -107,6 +108,124 @@
                         </li>
                     </ul>
                 </li>
+
+            </ul>
+
+            <!-- menu admins -->
+            <ul class="page-sidebar-menu page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-if="currentGroup == 'CCMZ_Admin'">
+                <li class="start ">
+                    <a ng-href="/#/home">
+                        <i class="icon-home"></i>
+                        <span class="title">Home</span>
+                        <span class="arrow "></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="icon-lock"></i>
+                        <span class="title">Usu&aacute;rios</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a ng-href="/#/users">
+                                <i class="icon-list"></i>
+                                Listar</a>
+                        </li>
+                        <li>
+                            <a ng-href="/#/users/new">
+                                <i class="fa fa-plus"></i>
+                                Novo</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-database"></i>
+                        <span class="title">Clientes</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a ng-href="/#/clients">
+                                <i class="icon-list"></i>
+                                Listar</a>
+                        </li>
+                        <li>
+                            <a ng-href="/#/clients/new">
+                                <i class="fa fa-plus"></i>
+                                Novo</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:;">
+                        <i class="icon-flag"></i>
+                        <span class="title">Equipes</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a ng-href="/#/teams">
+                                <i class="icon-list"></i>
+                                Listar</a>
+                        </li>
+                        <li>
+                            <a ng-href="/#/teams/new">
+                                <i class="fa fa-plus"></i>
+                                Nova</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-users"></i>
+                        <span class="title">Teleoperadores</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+
+                        <li>
+                            <a ng-href="/#/members">
+                                <i class="icon-list"></i>
+                                Listar</a>
+                        </li>
+                        <li>
+                            <a ng-href="/#/members/new">
+                                <i class="fa fa-user-plus"></i>
+                                Novo</a>
+                        </li>
+                        <li>
+                            <a ng-href="/#/members/addmany">
+                                <i class="fa fa-upload"></i>
+                                Cadastrar V&aacute;rios</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-suitcase"></i>
+                        <span class="title">Carteiras</span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+
+                        <li>
+                            <a ng-href="/#/carteiras/addmany">
+                                <i class="fa fa-upload"></i>
+                                Cadastrar</a>
+                        </li>
+                    </ul>
+                </li>
+
+
 
             </ul>
 
@@ -248,6 +367,5 @@
     <script src="{{elixir('js/all.js')}}" type="text/javascript"></script>
 @endif
 
-<div login-dialog ng-if="!isLoginPage"></div>
 </body>
 </html>
