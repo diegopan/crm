@@ -1,52 +1,118 @@
-angular.module('crm.controllers')
-    .controller('PortfolioNewController', ['$scope', '$location', 'Member', 'Team', 'appConfig', '$http',
-        function ($scope, $location, Member, Team, appConfig, $http) {
-
-            $scope.user = {};
-            $scope.users = [];
-
-            $scope.team = {};
-            $scope.teams = [];
+(function () {
+    "use strict";
 
 
+    angular.module('crm.controllers')
+        .controller('PortfolioNewController', ['$scope', '$location', 'Client', 'Team', 'Member', 'Portfolio',
+            function ($scope, $location, Client, Team, Member, Portfolio) {
+
+                var vm = this;
 
 
-            $http.get(appConfig.baseUrl + '/user/search')
-                .then(function (response) {
-                    $scope.users = response.data
-                });
+                vm.portfolio = {};
+                vm.selectedClient = {};
+
+                vm.selectedTeam;
+
+                vm.selectedMember;
 
 
-            $http.get(appConfig.baseUrl + '/team')
-                .then(function (response) {
-                    $scope.teams = response.data
-                });
+                vm.getClients = function (param) {
+                    return Client.query({
+                        search: param,
+                        searchFields: 'cnpj:like',
+                        with: 'portfolio'
+                    }).$promise;
+                };
 
 
-            $scope.resetUser = function($item){
-                $scope.member.user_id = $item.id;
-            };
+                vm.formatClient = function (cli) {
+                    if (cli) {
+
+                        return cli.razao;
+                    }
+                };
 
 
-            $scope.resetTeam = function($item){
-                $scope.member.team_id = $item.id;
-            };
+                vm.changeCli = function (cli) {
+                    if (cli) {
+                        vm.portfolio.client_id = cli.id;
+                    }
+                };
+
+
+                vm.getTeams = function (param) {
+                    return Team.query({
+                        search: param,
+                        searchFields: 'name:like'
+                    }).$promise;
+                };
+
+
+                vm.formatTeam = function (team) {
+
+                    if (team) {
+                        return team.slug + '-' + team.name;
+                    }
+
+                    return '';
+                };
+
+                vm.changeTeam = function (team) {
+                    if (team) {
+                        vm.portfolio.team_id = team.id;
+                    }
+                };
 
 
 
-            $scope.member = new Member();
+                vm.getMembers = function (param) {
+                    return Member.query({
+                        search: param +";"+ vm.portfolio.team_id,
+                        searchFields: 'sap:like;team_id'
 
-            $scope.save = function () {
+                    }).$promise;
+                };
 
-                if ($scope.form.$valid) {
-                    $scope.member.$save().then(function () {
-                        $location.path('/members');
-                    }, function (response) {
-                        console.log(response);
+
+                vm.formatMember = function (member) {
+                    if (member) {
+
+                        return member.sap + ' - ' + member.user.name;
+                    }
+
+                    return '';
+                };
+
+
+                vm.changeMember = function (member) {
+
+                    if (member) {
+                        vm.portfolio.member_id = member.id;
+                    }
+                };
+
+
+                vm.isDisabled = function(model){
+
+                    if(model){
+
+                        return !model.hasOwnProperty('id');
+                    }
+                    return true;
+                };
+
+
+                vm.portfolio = new Portfolio();
+                vm.save = function(){
+                    vm.portfolio.$save().then(function(resp){
+                        $location.path('/carteiras');
+                    }, function(resp){
+                        console.log(resp);
                     });
-                }
-
-            };
+                };
 
 
-        }]);
+            }]);
+
+})();

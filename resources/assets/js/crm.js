@@ -264,6 +264,38 @@ app.config(['$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigP
                     authorizedRoles: [USER_ROLES.admin]
                 }
             })
+            .when('/carteiras/new', {
+                templateUrl: 'build/views/portfolio/new.html',
+                controller: 'PortfolioNewController',
+                controllerAs: 'PortfolioNew',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+
+            .when('/carteiras/:id/edit', {
+                templateUrl: 'build/views/portfolio/edit.html',
+                controller: 'PortfolioEditController',
+                controllerAs: 'PortfolioEdit',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+            .when('/carteiras/:id/remove', {
+                templateUrl: 'build/views/portfolio/remove.html',
+                controller: 'PortfolioRemoveController',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+            .when('/carteiras', {
+                templateUrl: 'build/views/portfolio/list.html',
+                controller: 'PortfolioListController',
+                controllerAs: 'PortfolioList',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
             .when('/carteira', {
                 templateUrl: 'build/views/member/carteira.html',
                 controller: 'MemberCarteiraController',

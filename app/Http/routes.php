@@ -74,7 +74,7 @@ Route::group(['middleware' => 'oauth'], function () {
     /*
      * Portfolio Routes
      */
-    Route::resource('portfolio', 'PortfolioController', ['except' => ['index', 'create', 'edit']]);
+    Route::resource('portfolio', 'PortfolioController', ['except' => ['create', 'edit']]);
     Route::group(['prefix' => 'portfolio'], function () {
 
         Route::get('member/{member_id}/list', ['uses' => 'PortfolioController@listAll']);

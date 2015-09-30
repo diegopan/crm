@@ -82,6 +82,12 @@ class PortfolioService
     }
 
 
+
+    public function all(){
+        return response()->json([$this->repository->with(['team','client','member'])->all()]);
+    }
+
+
     public function listAll($member_id)
     {
         try {
@@ -238,7 +244,7 @@ class PortfolioService
     public function show($id)
     {
         try {
-            $portfolio = Portfolio::with(['client', 'config'])->findOrFail($id);
+            $portfolio = Portfolio::with(['client', 'config', 'member', 'team'])->findOrFail($id);
             //dd($portfolio);exit;
             if ($portfolio->phone != null && $portfolio->phone != '') {
                 $portfolio->phone = json_decode($portfolio->phone);
@@ -275,64 +281,11 @@ class PortfolioService
 
         try {
 
-            /*
-             * Check Member
-             */
-            if (Member::where('sap', $data['sap'])->firstOrFail()) {
-
-                $member = Member::where('sap', $data['sap'])->first();
-                $toSave['member_id'] = $member->id;
-            }
-
-            /*
-             * Check Team
-             */
-            if (Team::where('slug', $data['equipe'])->firstOrFail()) {
-
-                $team = Team::where('slug', $data['equipe'])->first();
-                $toSave['team_id'] = $team->id;
-            }
+            $toSave['client_id'] = $data['client_id'];
+            $toSave['team_id'] = $data['team_id'];
+            $toSave['member_id'] = $data['member_id'];
 
 
-            /*
-             * Tratamento para cnpj com menos de 14 digitos.
-             */
-            $cnpj_count = strlen( $data['cnpj']);
-
-            for($i = 0; $cnpj_count < 14; $i++){
-                $data['cnpj'] = substr_replace($data['cnpj'], '0', 0, 0);
-
-                $cnpj_count ++;
-            }
-
-
-
-
-            /*
-             * Check Client
-             */
-            if (Client::where('cnpj', $data['cnpj'])->firstOrFail()) {
-
-                $client = Client::where('cnpj', $data['cnpj'])->first();
-                $toSave['client_id'] = $client->id;
-            }
-
-
-            /*
-             * Responsible
-             */
-            $toSave['responsible'] = $data['contato'];
-
-
-            /*
-             * Phones
-             */
-            $toSave['phone'] = json_encode($data['fone']);
-
-            /*
-             * Email
-             */
-            $toSave['email'] = json_encode($data['email']);
 
 
             /*

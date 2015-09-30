@@ -1,14 +1,14 @@
 angular.module('crm.controllers')
-    .controller('MemberRemoveController', ['$scope', '$location', '$routeParams', 'Member',
-        function ($scope, $location, $routeParams, Member) {
+    .controller('PortfolioRemoveController', ['$scope', '$location', '$routeParams', 'Portfolio',
+        function ($scope, $location, $routeParams, Portfolio) {
 
-        $scope.member = Member.get({id: $routeParams.id});
+        $scope.portfolio = Portfolio.get({id: $routeParams.id});
 
         $scope.remove = function () {
 
             if ($scope.form.$valid) {
-                $scope.member.$delete().then(function(){
-                    $location.path('/members');
+                $scope.portfolio.$delete().then(function(){
+                    $location.path('/carteiras');
                 });
             }
 

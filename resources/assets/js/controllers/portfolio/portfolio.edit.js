@@ -1,52 +1,127 @@
-angular.module('crm.controllers')
-    .controller('MemberEditController', ['$scope', '$location', '$routeParams', '$http', 'appConfig', 'Team', 'User', 'Member',
-        function ($scope, $location, $routeParams, $http, appConfig, Team, User, Member) {
+(function () {
+    "use strict";
 
 
-            $scope.team = {};
-            $scope.user = {};
-            $scope.member = Member.get({id: $routeParams.id},
-                function (response) {
-                    $scope.user.selected = User.get({id: $scope.member.user_id});
-                    $scope.team.selected = Team.get({id: $scope.member.team_id});
-                });
+    angular.module('crm.controllers')
+        .controller('PortfolioEditController', ['$scope','$routeParams','$location', 'Client', 'Team', 'Member', 'Portfolio',
+            function ($scope, $routeParams, $location, Client, Team, Member, Portfolio) {
+
+                var vm = this;
 
 
-            $scope.teams = [];
-            $scope.users = [];
+                vm.portfolio = Portfolio.get({id: $routeParams.id});
 
 
-            $http.get(appConfig.baseUrl + '/user/search')
-                .then(function (response) {
-                    $scope.users = response.data
-                });
+                vm.selectedClient = vm.portfolio.client;
+
+                vm.selectedTeam = vm.portfolio.team;
+
+                vm.selectedMember = vm.portfolio.member;
 
 
-            $http.get(appConfig.baseUrl + '/team')
-                .then(function (response) {
-                    $scope.teams = response.data
-                });
 
 
-            $scope.resetUser = function ($item) {
-                $scope.member.user_id = $item.id;
-            };
+                vm.getClients = function (param) {
+                    return Client.query({
+                        search: param,
+                        searchFields: 'cnpj:like',
+                        with: 'portfolio'
+                    }).$promise;
+                };
 
 
-            $scope.resetTeam = function ($item) {
-                $scope.member.team_id = $item.id;
-            };
+                vm.formatClient = function (cli) {
+                    if (cli) {
+
+                        return cli.razao;
+                    }
+                };
 
 
-            $scope.save = function () {
+                vm.changeCli = function (cli) {
+                    if (cli) {
+                        vm.portfolio.client_id = cli.id;
+                    }
+                };
 
-                if ($scope.form.$valid) {
-                    Member.update({id: $scope.member.id}, $scope.member, function () {
-                        $location.path('/members');
+
+                vm.getTeams = function (param) {
+                    return Team.query({
+                        search: param,
+                        searchFields: 'name:like'
+                    }).$promise;
+                };
+
+
+                vm.formatTeam = function (team) {
+
+                    if (team) {
+                        return team.slug + '-' + team.name;
+                    }
+
+                    return '';
+                };
+
+                vm.changeTeam = function (team) {
+                    if (team) {
+                        vm.portfolio.team_id = team.id;
+                    }
+                };
+
+
+
+                vm.getMembers = function (param) {
+                    return Member.query({
+                        search: param +";"+ vm.portfolio.team_id,
+                        searchFields: 'sap:like;team_id'
+
+                    }).$promise;
+                };
+
+
+                vm.formatMember = function (member) {
+                    if (member) {
+
+                        return member.sap + ' - ' + member.user.name;
+                    }
+
+                    return '';
+                };
+
+
+                vm.changeMember = function (member) {
+
+                    if (member) {
+                        vm.portfolio.member_id = member.id;
+                    }
+                };
+
+
+                vm.isDisabled = function(model){
+
+                    if(model){
+
+                        return !model.hasOwnProperty('id');
+                    }
+                    return true;
+                };
+
+
+                vm.toUpdateData = {
+                    client_id: vm.selectedClient.id,
+                    team_id: vm.selectedTeam.id,
+                    member_id: vm.selectedMember.id
+                };
+
+
+
+                vm.save = function(){
+                    Portfolio.update({id: vm.portfolio.id},  vm.toUpdateData, function () {
+                        $location.path('/carteiras');
                     });
+                };
 
-                }
 
-            };
+            }]);
 
-        }]);
+})();
