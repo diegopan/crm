@@ -87,8 +87,6 @@
                                 vm.initAleatorySales(cli);
 
 
-
-
                     }
                     return '';
                 };

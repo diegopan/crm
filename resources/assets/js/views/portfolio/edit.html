@@ -2,66 +2,90 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Editar de Teleoperador</div>
+                <div class="panel-heading">Alteração de Carteira</div>
                 <div class="panel-body">
 
 
-                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()" novalidate>
+                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="PortfolioEdit.save()" novalidate>
 
-                        <!-- user field -->
-                        <div class="form-group" ng-class="{'has-error':!form.user_id.$valid && form.user_id.$touched}">
-                            <label class="col-md-4 control-label">Usuário:</label>
+                        <!-- client field -->
+                        <div class="form-group" ng-class="{'has-error':!form.client_id.$valid && form.client_id.$touched}">
+                            <label class="col-md-4 control-label">Cliente:</label>
                             <div class="col-md-6">
 
-                                <ui-select ng-model="user.selected" theme="bootstrap" on-select="resetUser($item)" name="user_id" required>
-                                    <ui-select-match placeholder="Selecione ou pesquise um usuário na lista...">{{$select.selected.name}}</ui-select-match>
-                                    <ui-select-choices repeat="u in users | filter: $select.search">
-                                        <div ng-bind-html="u.name | highlight: $select.search"></div>
-                                        <small ng-bind-html="u.username | highlight: $select.search"></small>
-                                    </ui-select-choices>
-                                </ui-select>
+                                <div class="input-icon">
+                                    <i class="fa fa-search"></i>
+                                    <input class="form-control" type="text" name="client_id"
+                                           placeholder="Pesquise somente por CNPJ ..."
+                                           ng-model="PortfolioEdit.selectedClient"
+                                           typeahead="o as (o.cnpj + ' - ' + o.razao) for o in PortfolioEdit.getClients($viewValue)|limitTo:10"
+                                           typeahead-input-formatter="PortfolioEdit.formatClient($model)"
+                                           typeahead-on-select="PortfolioEdit.changeCli($item)"
+                                           typeahead-min-length="4" required/>
+                                </div>
 
-                                <div class="help-block" ng-messages="form.user_id.$error" ng-show="form.user_id.$touched">
+                                <div class="help-block" ng-messages="form.client_id.$error" ng-show="form.client_id.$touched">
                                     <div ng-message="required">Campo obrigatório</div>
                                 </div>
 
                             </div>
                         </div>
+
+
 
                         <!-- team field -->
                         <div class="form-group" ng-class="{'has-error':!form.team_id.$valid && form.team_id.$touched}">
                             <label class="col-md-4 control-label">Equipe:</label>
                             <div class="col-md-6">
-                                <ui-select ng-model="team.selected" theme="bootstrap" on-select="resetTeam($item)" name="team_id" required>
-                                    <ui-select-match placeholder="Selecione ou pesquise uma equipe na lista....">{{$select.selected.name}}</ui-select-match>
-                                    <ui-select-choices repeat="t in teams | filter: $select.search">
-                                        <div>
-                                            <small ng-bind-html="t.slug | highlight: $select.search"></small> -
-                                            <span ng-bind-html="t.name | highlight: $select.search"></span>
-                                        </div>
-                                    </ui-select-choices>
-                                </ui-select>
+
+                                <div class="input-icon">
+                                    <i class="fa fa-search"></i>
+                                    <input class="form-control" type="text" name="team_id"
+                                           placeholder="Pesquise somente pelo nome da equipe ..."
+                                           ng-model="PortfolioEdit.selectedTeam"
+                                           typeahead="o as (o.slug + ' - ' + o.name) for o in PortfolioEdit.getTeams($viewValue)|limitTo:10"
+                                           typeahead-input-formatter="PortfolioEdit.formatTeam($model)"
+                                           typeahead-on-select="PortfolioEdit.changeTeam($item)"
+                                           typeahead-min-length="4" required/>
+
+                                </div>
+
                                 <div class="help-block" ng-messages="form.team_id.$error" ng-show="form.team_id.$touched">
                                     <div ng-message="required">Campo obrigatório</div>
                                 </div>
+
                             </div>
                         </div>
 
-                        <!-- SAP field -->
-                        <div class="form-group" ng-class="{'has-error':!form.sap.$valid && form.sap.$touched}">
-                            <label class="col-md-4 control-label">SAP</label>
+
+
+                        <!-- member field -->
+                        <div class="form-group" ng-class="{'has-error':!form.member_id.$valid && form.member_id.$touched}">
+                            <label class="col-md-4 control-label">Operador:</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="sap" ng-model="member.sap" required>
-                                <div class="help-block" ng-messages="form.sap.$error" ng-show="form.sap.$touched">
+
+                                <div class="input-icon">
+                                    <i class="fa fa-search"></i>
+                                    <input class="form-control" type="text" name="member_id"
+                                           ng-disabled="PortfolioEdit.isDisabled(PortfolioEdit.selectedTeam)"
+                                           placeholder="Pesquise somente pelo sap do teleoperador ..."
+                                           ng-model="PortfolioEdit.selectedMember"
+                                           typeahead="o as (o.sap + ' - ' + o.user.name) for o in PortfolioEdit.getMembers($viewValue)| limitTo:10"
+                                           typeahead-input-formatter="PortfolioEdit.formatMember($model)"
+                                           typeahead-on-select="PortfolioEdit.changeMember($item)"
+                                           typeahead-min-length="4" required/>
+                                </div>
+
+                                <div class="help-block" ng-messages="form.member_id.$error" ng-show="form.member_id.$touched">
                                     <div ng-message="required">Campo obrigatório</div>
                                 </div>
+
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" ng-disabled="!form.$valid">Editar</button>
-
+                                <button type="submit" class="btn btn-primary" ng-disabled="!form.$valid">Salvar</button>
                             </div>
                         </div>
                     </form>

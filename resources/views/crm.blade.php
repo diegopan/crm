@@ -218,9 +218,21 @@
                     <ul class="sub-menu">
 
                         <li>
+                            <a ng-href="/#/carteiras">
+                                <i class="icon-list"></i>
+                                Listar</a>
+                        </li>
+
+                        <li>
+                            <a ng-href="/#/carteiras/new">
+                                <i class="fa fa-plus"></i>
+                                Novo</a>
+                        </li>
+
+                        <li>
                             <a ng-href="/#/carteiras/addmany">
                                 <i class="fa fa-upload"></i>
-                                Cadastrar</a>
+                                Cadastrar V&aacute;rios</a>
                         </li>
                     </ul>
                 </li>
@@ -297,6 +309,10 @@
 
     <!-- CONTROLLERS: PORTFOLIO -->
     <script src="{{asset('build/js/controllers/portfolio/portfolio.addm.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/controllers/portfolio/portfolio.new.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/controllers/portfolio/portfolio.list.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/controllers/portfolio/portfolio.remove.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/controllers/portfolio/portfolio.edit.js')}}" type="text/javascript"></script>
 
 
     <!-- CONTROLLERS: USER -->

@@ -1,5 +1,5 @@
 (function () {
-
+    "use strict";
 
     angular.module('crm.controllers')
         .controller('MemberNewController', ['$scope', '$location', 'User', 'Member', 'Team',
@@ -73,7 +73,7 @@
                 vm.save = function () {
 
                     if ($scope.form.$valid) {
-                        console.log('valido');
+
                         vm.member.$save().then(function () {
                             $location.path('/members');
                         }, function (response) {

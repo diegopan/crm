@@ -1,36 +1,76 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Lista de Teleoperadores</div>
-                <div class="panel-body">
+<div class="row">
 
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Equipe</th>
-                            <th>SAP</th>
-                            <th>Clientes</th>
-                            <th>Ações</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="o in members">
-                                <td>{{o.user.name}}</td>
-                                <td>{{o.team.name}}</td>
-                                <td>{{o.sap}}</td>
-                                <td>{{o.portfolios.length}}</td>
-                                <td>
-                                    <a ng-href="#/members/{{o.id}}/edit">Editar</a> |
-                                    <a ng-href="#/members/{{o.id}}/remove">Excluir</a>
-                                </td>
+    <div class="col-sm-12">
+
+        <div class="todo-ui">
+
+            <!-- BEGIN TODO CONTENT -->
+            <div class="todo-content">
+                <div class="portlet light">
+                    <!-- PROJECT HEAD -->
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-bar-chart font-blue-ebonyclay hide"></i>
+                            <span class="caption-helper font-blue-ebonyclay bold uppercase">Carteiras</span>
+                        </div>
+                        <div class="actions">
+
+                        </div>
+                    </div>
+                    <div class="portlet-body flip-scroll">
+                        <table datatable="ng" dt-options="PortfolioList.dtOptions" class="table table-bordered table-striped table-condensed table-hover flip-content">
+                            <thead class="flip-content">
+                            <tr>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th width="20%">
+                                    Equipe
+                                </th>
+                                <th>
+                                    Operador SAP
+                                </th>
+
+
+                                <th class="numeric text-center"  width="8%">
+                                    <a href="javascript:;">
+                                        <i class="icon-settings font-blue-ebonyclay"></i>
+                                    </a>
+                                </th>
+
                             </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="o in PortfolioList.portfolio[0]">
+                                <td>
+                                    {{o.client.cnpj}} - {{o.client.razao}}
+                                </td>
+                                <td>
+                                    {{o.team.name}}
+                                </td>
+                                <td>
+                                    {{o.member.sap}}
+                                </td>
 
+
+                                <td class="numeric text-center">
+                                    <a ng-href="#/carteiras/{{o.id}}/remove" tooltip="Excluir">
+                                        <i class="fa fa-trash font-blue-ebonyclay"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <!-- END TODO CONTENT -->
         </div>
     </div>
+    <!-- END LEFT CONTENT-->
+
+
+    <!-- END PAGE CONTENT-->
 </div>

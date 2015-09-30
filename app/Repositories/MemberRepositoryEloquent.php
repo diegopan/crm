@@ -12,6 +12,13 @@ use Crm\Entities\Member;
  */
 class MemberRepositoryEloquent extends BaseRepository implements MemberRepository
 {
+
+    protected $fieldSearchable = [
+
+        'sap',
+        'team_id'
+    ];
+
     /**
      * Specify Model class name
      *
@@ -27,6 +34,6 @@ class MemberRepositoryEloquent extends BaseRepository implements MemberRepositor
      */
     public function boot()
     {
-        $this->pushCriteria( app(RequestCriteria::class) );
+        $this->pushCriteria( app('Prettus\Repository\Criteria\RequestCriteria') );
     }
 }
