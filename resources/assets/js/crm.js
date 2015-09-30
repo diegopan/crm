@@ -139,7 +139,6 @@ app.config(['$routeProvider', 'OAuthProvider', 'OAuthTokenProvider', 'appConfigP
 
             .when('/home', {
                 templateUrl: 'build/views/home.html',
-                controller: 'HomeController',
                 data: {
                     authorizedRoles: [USER_ROLES.admin, USER_ROLES.guest]
                 }
@@ -347,12 +346,14 @@ app.run(['$rootScope', '$window', 'OAuth', '$cookies', 'AUTH_EVENTS', 'AuthServi
         $rootScope.$on(AUTH_EVENTS.logoutSuccess, function (event, rejection) {
 
             $rootScope.currentUser = null;
+            $rootScope.currentGroup = null;
         });
 
 
         $rootScope.$on(AUTH_EVENTS.notAuthenticated, function (event, rejection) {
 
             $rootScope.currentUser = null;
+            $rootScope.currentGroup = null;
         });
 
 
@@ -362,6 +363,7 @@ app.run(['$rootScope', '$window', 'OAuth', '$cookies', 'AUTH_EVENTS', 'AuthServi
             if( AuthService.isAuthenticated() ){
 
                 $rootScope.currentUser = $cookies.getObject('user').name;
+                $rootScope.currentGroup = $cookies.getObject('user').group.name;
             }else{
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
             }
