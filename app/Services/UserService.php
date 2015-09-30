@@ -102,20 +102,19 @@ class UserService
 
     public function save(array $data)
     {
-        if($data['password']){
+        if ($data['password']) {
             $data['password'] = bcrypt($data['password']);
-        }else{
+        } else {
             $data['password'] = bcrypt($data['init@123']);
         }
 
 
-        if(!$data['recovery']){
+        if (!$data['recovery']) {
             $data['recovery'] = 'panpharma';
         }
 
 
         $data['remember_token'] = str_random(10);
-
 
 
         try {
@@ -126,48 +125,51 @@ class UserService
     }
 
 
-
-
     public function update(array $data, $id)
     {
 
-            try {
+        if ($data['password']) {
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            $data['password'] = bcrypt($data['init@123']);
+        }
 
-                if (User::findOrFail($id)) {
+        try {
 
-                    try {
+            if (User::findOrFail($id)) {
 
-                        return response()->json($this->repository->update($data, $id));
+                try {
 
-                    } catch (ValidatorException $e) {
+                    return response()->json($this->repository->update($data, $id));
 
-                        return response()->json([
-                            "error" => true,
-                            "message" => $e->getMessageBag()
-                        ], 412);
-                    }
+                } catch (ValidatorException $e) {
 
+                    return response()->json([
+                        "error" => true,
+                        "message" => $e->getMessageBag()
+                    ], 412);
                 }
 
-            } catch (ModelNotFoundException $e) {
-
-                return response()->json([
-                    "error" => true,
-                    "message" => $e->getMessage()
-                ], 412);
             }
+
+        } catch (ModelNotFoundException $e) {
+
+            return response()->json([
+                "error" => true,
+                "message" => $e->getMessage()
+            ], 412);
+        }
 
     }
 
 
-
     public function delete($id)
     {
-        try{
-            if( User::findOrFail($id) ) {
+        try {
+            if (User::findOrFail($id)) {
                 return response()->json(['success' => $this->repository->delete($id)]);
             }
-        }catch (ModelNotFoundException $e){
+        } catch (ModelNotFoundException $e) {
             return response()->json([
                 "error" => true,
                 "message" => $e->getMessage()
