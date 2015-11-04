@@ -82,9 +82,9 @@ class PortfolioService
     }
 
 
-
-    public function all(){
-        return response()->json([$this->repository->with(['team','client','member'])->all()]);
+    public function all()
+    {
+        return response()->json([$this->repository->with(['team', 'client', 'member'])->all()]);
     }
 
 
@@ -116,23 +116,23 @@ class PortfolioService
 
                 $weekDay = Carbon::now('America/Sao_Paulo')->dayOfWeek;
 
-                if($weekDay == 1){
+                if ($weekDay == 1) {
                     $weekDay = 'seg';
                 }
 
-                if($weekDay == 2){
+                if ($weekDay == 2) {
                     $weekDay = 'ter';
                 }
 
-                if($weekDay == 3){
+                if ($weekDay == 3) {
                     $weekDay = 'qua';
                 }
 
-                if($weekDay == 4){
+                if ($weekDay == 4) {
                     $weekDay = 'qui';
                 }
 
-                if($weekDay == 5){
+                if ($weekDay == 5) {
                     $weekDay = 'sex';
                 }
 
@@ -154,7 +154,8 @@ class PortfolioService
                     ->select('portfolio_attendances.portfolio_id')
                     ->get();
 
-                $except = [];$finalized = [];
+                $except = [];
+                $finalized = [];
 
                 foreach ($queryExcpt as $ob) {
                     $except[] = $ob->portfolio_id;
@@ -281,9 +282,76 @@ class PortfolioService
 
         try {
 
-            $toSave['client_id'] = $data['client_id'];
-            $toSave['team_id'] = $data['team_id'];
-            $toSave['member_id'] = $data['member_id'];
+            if( isset($data['client_id']) && isset($data['team_id']) && isset($data['member_id'])){
+                $toSave['client_id'] = $data['client_id'];
+                $toSave['team_id'] = $data['team_id'];
+                $toSave['member_id'] = $data['member_id'];
+            }else{
+
+                /*
+             * Check Member
+             */
+                if (Member::where('sap', $data['sap'])->firstOrFail()) {
+
+                    $member = Member::where('sap', $data['sap'])->first();
+                    $toSave['member_id'] = $member->id;
+                }
+
+
+                /*
+                 * Check Team
+                 */
+                if (Team::where('slug', $data['equipe'])->firstOrFail()) {
+
+                    $team = Team::where('slug', $data['equipe'])->first();
+                    $toSave['team_id'] = $team->id;
+                }
+
+
+                /*
+                 * Tratamento para cnpj com menos de 14 digitos.
+                 */
+                $cnpj_count = strlen($data['cnpj']);
+
+                for ($i = 0; $cnpj_count < 14; $i++) {
+                    $data['cnpj'] = substr_replace($data['cnpj'], '0', 0, 0);
+
+                    $cnpj_count++;
+                }
+
+
+                /*
+                 * Check Client
+                 */
+                if (Client::where('cnpj', $data['cnpj'])->firstOrFail()) {
+
+                    $client = Client::where('cnpj', $data['cnpj'])->first();
+                    $toSave['client_id'] = $client->id;
+                }
+
+            }
+
+
+
+
+
+
+
+            /*
+             * Responsible
+             */
+            $toSave['responsible'] = $data['contato'];
+
+
+            /*
+             * Phones
+             */
+            $toSave['phone'] = json_encode($data['fone']);
+
+            /*
+             * Email
+             */
+            $toSave['email'] = json_encode($data['email']);
 
 
             /*
