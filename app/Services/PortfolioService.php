@@ -286,8 +286,6 @@ class PortfolioService
             $toSave['member_id'] = $data['member_id'];
 
 
-
-
             /*
              * Validation && Save
              */
@@ -375,7 +373,8 @@ class PortfolioService
 
 
             if ($this->validator->with($ln[$y])->passes(ValidatorInterface::RULE_CREATE)) {
-                array_push($toSave, $ln[$y]);
+                //array_push($toSave, $ln[$y]);
+                $this->store($ln[$y]);
             } else {
 
                 $lineError[$y]['val'] = $this->validator->errorsBag()->getMessageBag();
@@ -396,14 +395,14 @@ class PortfolioService
             return response()->json(['error' => true, 'val' => $preError], 412);
 
         }
+        /*
 
+                try {
 
-        try {
-
-            return response()->json(['success' => Member::insert($toSave), 'count' => count($toSave)]);
-        } catch (Exception $e) {
-            return response()->json(['error' => true, 'message' => $e->getMessage()]);
-        }
+                    return response()->json(['success' => Member::insert($toSave), 'count' => count($toSave)]);
+                } catch (Exception $e) {
+                    return response()->json(['error' => true, 'message' => $e->getMessage()]);
+                } */
 
     }
 
