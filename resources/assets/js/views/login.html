@@ -1,47 +1,125 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-2">
-            <div class="panel panel-default">
+<!--
+<div class="row">
+     <div class="col-md-6 col-md-offset-2">
+         <div class="panel panel-default">
 
-                <div class="panel-body">
+             <div class="panel-body">
 
-                    <div  class="alert alert-danger" ng-show="errors.error">
-                        <strong>Whoops!</strong> {{errors.message}}<br>
+                 <div  class="alert alert-danger" ng-show="errors.error">
+                     <strong>Whoops!</strong> {{errors.message}}<br>
+                 </div>
+
+
+                 <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="login()" novalidate>
+
+
+                     <div class="form-group" ng-class="{'has-error':!form.username.$valid && form.username.$touched}">
+                         <label class="col-md-4 control-label">Usu&aacute;rio</label>
+                         <div class="col-md-6">
+                             <input type="text" class="form-control" name="username" ng-model="user.username" required>
+                             <div class="help-block" ng-messages="form.username.$error" ng-show="form.username.$touched">
+                                 <div ng-message="required">Campo obrigatório</div>
+                             </div>
+                         </div>
+                     </div>
+
+                     <div class="form-group" ng-class="{'has-error':!form.password.$valid && form.password.$touched}">
+                         <label class="col-md-4 control-label">Senha</label>
+                         <div class="col-md-6">
+                             <input type="password" class="form-control" name="password" ng-model="user.password" required>
+                             <div class="help-block" ng-messages="form.password.$error" ng-show="form.password.$touched">
+                                 <div ng-message="required">Campo obrigatório</div>
+                             </div>
+                         </div>
+                     </div>
+
+                     <div class="form-group">
+                         <div class="col-md-6 col-md-offset-4">
+                             <button type="submit" class="btn btn-primary" ng-disabled="!form.$valid">Login</button>
+
+                         </div>
+                     </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+ </div> -->
+
+<div class="user-login-5">
+    <div class="row bs-reset">
+        <div class="col-md-6 login-container bs-reset">
+            <img class="login-logo login-6" src="/build/images/login/login-invert.png"/>
+
+            <div class="login-content">
+                <p>Seja bem vindo ao Gateway Panpharma, seu portal de informações integradas.</p>
+
+                <div  class="alert alert-danger" ng-show="errors.error">
+                    {{errors.message}}<br>
+                </div>
+
+                <form name="form" role="form" method="POST" ng-submit="login()" novalidate class="login-form">
+                    <div class="row">
+
+                            <div class="col-xs-6">
+                                <input type="text" placeholder="Usuário" class="form-control login-username"
+                                       id="login-username" name="username" ng-model="user.username" autocomplete="false" required/>
+
+                                <div class="help-block" ng-messages="form.username.$error"
+                                     ng-show="form.username.$touched">
+                                    <div ng-message="required" class="text-danger">Campo obrigatório</div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-6">
+                                <input type="password" placeholder="Senha" class="form-control login-password"
+                                       id="login-password" name="password" ng-model="user.password" required/>
+
+                                <div class="help-block" ng-messages="form.password.$error"
+                                     ng-show="form.password.$touched">
+                                    <div ng-message="required" class="text-danger">Campo obrigatório</div>
+                                </div>
+                            </div>
+
                     </div>
-
-
-                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="login()" novalidate>
-
-
-                        <div class="form-group" ng-class="{'has-error':!form.username.$valid && form.username.$touched}">
-                            <label class="col-md-4 control-label">Usu&aacute;rio</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="username" ng-model="user.username" required>
-                                <div class="help-block" ng-messages="form.username.$error" ng-show="form.username.$touched">
-                                    <div ng-message="required">Campo obrigatório</div>
-                                </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+                            <div class="forgot-password">
+                                <a href="javascript:;">Cadastre-se</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:;">Esqueci minha senha.</a>
                             </div>
+                            <button class="btn blue" type="submit" ng-disabled="!form.$valid">Entrar</button>
                         </div>
-
-                        <div class="form-group" ng-class="{'has-error':!form.password.$valid && form.password.$touched}">
-                            <label class="col-md-4 control-label">Senha</label>
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password" ng-model="user.password" required>
-                                <div class="help-block" ng-messages="form.password.$error" ng-show="form.password.$touched">
-                                    <div ng-message="required">Campo obrigatório</div>
-                                </div>
-                            </div>
+                    </div>
+                </form>
+            </div>
+            <div class="login-footer">
+                <div class="row bs-reset">
+                    <div class="col-xs-6 bs-reset">
+                        <div class="login-copyright text-left">
+                            <p>&nbsp;&nbsp;&nbsp;v <small>1.0.0</small></p>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" ng-disabled="!form.$valid">Login</button>
-
-                            </div>
+                    </div>
+                    <div class="col-xs-6 bs-reset">
+                        <div class="login-copyright text-right">
+                            <p><small>Copyright &copy; Panpharma 2015</small></p>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-6 hidden-xs bs-reset">
+            <div class="login-bg"></div>
+        </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    // init background slide images
+    $('.login-bg').backstretch([
+                "./build/images/login/bg1.jpg"
+            ]
+    );
+</script>

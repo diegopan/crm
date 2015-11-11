@@ -903,6 +903,9 @@ body {
   background-color: #364150;
 }
 
+body.login {
+    background-color: #fff;
+}
 /****
  CSS3 Spinner Bar
 ****/

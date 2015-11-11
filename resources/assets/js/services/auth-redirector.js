@@ -23,7 +23,9 @@
                     }
                     else if( userRole === 'CCMZ_Lider'){
 
-                        return $location.path('home');
+                        alert('um lider logou!');
+
+                        return $location.path('painel-equipe');
                     }
                     else if( userRole === 'guest'){
 
