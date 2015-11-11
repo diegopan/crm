@@ -20,8 +20,9 @@
         <link href="{{ asset('build/css/vendor/uniform.default.min.css') }}" type="text/css" rel="stylesheet"/>
         <link href="{{ asset('build/css/vendor/bootstrap-switch.min.css') }}" type="text/css" rel="stylesheet"/>
         <link href="{{ asset('build/css/layout.css') }}" type="text/css" rel="stylesheet"/>
+        <link href="{{ asset('build/css/login-5.min.css') }}" type="text/css" rel="stylesheet"/>
         <link href="{{ asset('build/css/components.css') }}" type="text/css" rel="stylesheet"/>
-        <link href="{{ asset('build/css/darkblue.css') }}" type="text/css" rel="stylesheet"/>
+      <link href="{{ asset('build/css/darkblue.css') }}" type="text/css" rel="stylesheet"/>
         <link href="{{ asset('build/css/todo.css') }}" type="text/css" rel="stylesheet"/>
         <link href="{{ asset('build/css/vendor/datatables.bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
     @else
@@ -29,9 +30,9 @@
     @endif
 
 </head>
-<body
-      class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed page-quick-sidebar-over-content page-container-bg-solid page-compact">
-
+<body ng-class="{'login':!currentUser, 'page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed page-quick-sidebar-over-content page-container-bg-solid page-compact': currentUser}" class="">
+<span us-spinner="{radius:30, width:8, length: 16}"></span>
+<div ng-show="!currentUser" ng-view></div>
 <div class="page-header navbar navbar-fixed-top" ng-show="currentUser">
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner">
@@ -81,9 +82,9 @@
     <!-- END HEADER INNER -->
 </div>
 
-<div class="page-container">
+<div class="page-container" ng-if="currentUser">
     <!-- BEGIN SIDEBAR -->
-    <div class="page-sidebar-wrapper" ng-show="currentUser">
+    <div class="page-sidebar-wrapper">
         <div class="page-sidebar navbar-collapse collapse">
             <!-- menu operadores -->
             <ul class="page-sidebar-menu page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-if="currentGroup == 'CCMZ_Operador'">
@@ -245,21 +246,25 @@
 
     </div>
 
-    <div class="page-content-wrapper">
-        <div class="page-content" ng-class="{login: !currentUser}" ng-view></div>
+    <div class="page-content-wrapper" >
+        <div class="page-content" ng-view></div>
     </div>
 
 </div>
 
+
 <!-- Scripts -->
 @if(Config::get('app.debug'))
     <script src="{{asset('build/js/vendor/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/vendor/jquery.backstretch.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/vendor/angular.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/vendor/angular-route.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/vendor/angular-resource.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/vendor/angular-animate.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/vendor/angular-sanitize.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/vendor/angular-messages.min.js')}}" type="text/javascript"></script>
+
+
     <script src="{{asset('build/js/vendor/toArrayFilter.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/vendor/ui-bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/vendor/ui-bootstrap-tpls.js')}}" type="text/javascript"></script>
@@ -276,7 +281,15 @@
     <script src="{{asset('build/js/vendor/angular-datatables.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('build/js/vendor/angular-datatables.bootstrap.min.js')}}" type="text/javascript"></script>
 
+
+
+
     <script src="{{asset('build/js/crm.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/routes/general.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/routes/admin-dashboard.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/routes/agenda-clientes.js')}}" type="text/javascript"></script>
+    <script src="{{asset('build/js/routes/painel-equipes.js')}}" type="text/javascript"></script>
+
 
     <!-- CONTROLLERS -->
     <script src="{{asset('build/js/controllers/login.js')}}" type="text/javascript"></script>
@@ -336,6 +349,10 @@
 
     <!-- CONTROLLERS: STATUS -->
     <script src="{{asset('build/js/controllers/status/status.js')}}" type="text/javascript"></script>
+
+
+    <!-- CONTROLLERS: LIDER -->
+    <script src="{{asset('build/js/controllers/painel-equipe/painel-equipe.js')}}" type="text/javascript"></script>
 
 
 

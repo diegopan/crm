@@ -1,0 +1,379 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb hide">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="index.html">CRM</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#"></a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Todo</a>
+        </li>
+    </ul>
+
+</div>
+<!-- END PAGE HEADER-->
+
+<!-- LISTA DE OPERADORES -->
+<div class="row">
+    <!-- BEGIN LEFT CONTENT-->
+    <div class="col-md-5 col-sm-4">
+
+        <div class="todo-ui">
+
+            <div class="todo-content">
+                <div class="portlet light">
+                    <!-- PROJECT HEAD -->
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-bar-chart font-blue-ebonyclay hide"></i>
+                            <span class="caption-helper font-blue-ebonyclay bold uppercase">EQUIPE CENTRO OESTE</span>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+
+                        <!-- BEGIN MEMBROS -->
+                        <div class="row">
+
+
+                            <div class="col-md-12 col-sm-12">
+                                <!-- BEGIN SEARCH FIELD -->
+                                <div class="input-icon">
+                                    <i class="fa fa-search"></i>
+                                    <input id="search" name="search" ng-model="search" type="text" class="form-control todo-taskbody-due"
+                                           placeholder="Pesquise por Código, CNPJ ou Razão...">
+                                </div>
+                                <!-- END SEARCH FIELD -->
+                                <br/>
+
+                                <div class="scroller" style="max-height: 600px;"
+                                     slimscroll="{color:'#dae3e7', height: '600px'}">
+                                    <div class="todo-tasklist">
+                                        <div class="todo-tasklist-item">
+
+                                            <div class="todo-tasklist-item-title">
+                                                <i class="fa fa-user"></i> Alessandra Medeiros
+                                            </div>
+                                            <div class="todo-tasklist-item-text">
+                                                <strong>Clientes:&nbsp;</strong>60&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;
+                                                <br>
+
+                                            </div>
+                                            <div class="todo-tasklist-controls pull-left">
+                                                <ul class="list-inline">
+                                                    <li ng-repeat="tg in ag.tags">
+                                                        <span class="todo-tasklist-badge badge badge-roundless uppercase"><Ver></Ver></span>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <!-- END MEMBROS -->
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END LEFT CONTENT-->
+
+
+    <!-- BEGIN RIGHT CONTENT-->
+    <div class="col-md-7 col-sm-8">
+
+        <div class="todo-ui">
+
+            <!-- BEGIN TODO CONTENT -->
+            <div class="todo-content">
+                <div class="portlet light">
+                    <!-- PROJECT HEAD -->
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-line-chart font-blue-ebonyclay"></i>
+                            <span class="caption-helper font-blue-ebonyclay bold uppercase">Desempenho da Equipe</span>
+                        </div>
+                    </div>
+                    <!-- end PROJECT HEAD -->
+                    <div class="portlet-body">
+
+                        <div class="row">
+
+
+                            <div class="col-sm-12">
+
+                                <!-- BEGIN TEAM STATS -->
+                                <div class="col-md-12">
+                                    <div class="portlet">
+
+                                        <div class="portlet-body">
+
+                                            <div class="col-sm-3">
+                                                <div class="table-scrollable">
+                                                    <table class="table table-condensed">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center bg-green">
+                                                                <i class="fa fa-line-chart"></i>
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="highlight text-center font-blue-ebonyclay bold">
+
+                                                                Positivação
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="highlight text-center font-blue-ebonyclay bold">
+
+                                                                Venda
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="highlight text-center font-blue-ebonyclay bold">
+
+                                                                Tiket Médio
+                                                            </td>
+
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="table-scrollable">
+                                                    <table class="table table-condensed">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center bg-green">
+                                                                Hoje
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="highlight text-center">
+
+                                                                467 de 890
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="highlight text-center">
+                                                                R$&nbsp; 1.678.45,67
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="highlight text-center">
+                                                                R$&nbsp; 768,22
+                                                            </td>
+
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="table-scrollable">
+                                                    <table class="table table-condensed">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center bg-green">
+                                                                Mensal
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="highlight text-center">
+
+                                                                890 de 890
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="highlight text-center">
+                                                                R$&nbsp; 1.678.45,67
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="highlight text-center">
+                                                                654,88
+                                                            </td>
+
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="clearfix"></div>
+                                            <br/><br/>
+
+                                            <div class="caption" style="border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                                                <i class="fa fa-calendar-check-o font-blue-ebonyclay"></i>
+                                                <span class="caption-helper font-blue-ebonyclay bold uppercase">Análise Trimestral da Carteira</span>
+                                            </div>
+                                            <br/>
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-4">
+                                                    <div class="table-scrollable">
+                                                        <table class="table table-condensed">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="text-center bg-green">
+                                                                    Informações Gerais
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">Ticket Médio: </span>
+                                                                    <span class="pull-right">R$ 980</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">Méd. Semanal: </span>
+                                                                    <span class="pull-right">R$ 160.000</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">Méd. Trimestral: </span>
+                                                                    <span class="pull-right">R$ 4.567.988,00</span>
+                                                                </td>
+                                                            </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="table-scrollable">
+                                                        <table class="table table-condensed">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="text-center bg-green">
+                                                                    Vendas / Canal
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">Ativo: </span>
+                                                                    <span class="pull-right">R$  -  <span class="font-purple-seance">%</span></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">Receptivo: </span>
+                                                                    <span class="pull-right">R$  -  <span class="font-purple-seance">%</span></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">Eletrônico: </span>
+                                                                    <span class="pull-right">R$  - <span class="font-purple-seance">%</span> </span>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="table-scrollable">
+                                                        <table class="table table-condensed">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="text-center bg-green">
+                                                                    Segmento de Produtos
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">Genéricos: </span>
+                                                                    <span class="pull-right">R$  - <span class="font-purple-seance">%</span></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">Hig. Beleza: </span>
+                                                                    <span class="pull-right">R$  - <span class="font-purple-seance">%</span></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">OTC: </span>
+                                                                    <span class="pull-right">R$  - <span class="font-purple-seance">%</span></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="highlight text-left">
+                                                                    <span class="bold text-blue">&Eacute;tico: </span>
+                                                                    <span class="pull-right">R$  - <span class="font-purple-seance">%</span></span>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- END TEAM STATS -->
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                            <!-- END PORTFOLIO FORMS -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END TODO CONTENT -->
+        </div>
+    </div>
+    <!-- END RICHT CONTENT-->
+
+    <!-- END PAGE CONTENT-->
+</div>
