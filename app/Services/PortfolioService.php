@@ -340,17 +340,27 @@ class PortfolioService
             /*
              * Responsible
              */
+            if(!isset($data['contato'])){
+                $data['contato'] = '-';
+            }
             $toSave['responsible'] = $data['contato'];
 
 
             /*
              * Phones
              */
+            if(!isset($data['fone'])){
+                $data['fone'] = ['-'];
+            }
+
             $toSave['phone'] = json_encode($data['fone']);
 
             /*
              * Email
              */
+            if(!isset($data['email'])){
+                $data['email'] = ['-'];
+            }
             $toSave['email'] = json_encode($data['email']);
 
 
